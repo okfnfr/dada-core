@@ -1,0 +1,24 @@
+language: ruby
+dist: xenial
+rvm:
+  - 2.5
+
+before_install:
+# install ansible for provisioning of server (setup db, nginx, MTA...)
+- add-apt-repository --yes ppa:ansible/ansible
+- apt-get update
+- apt-get install ansible
+# install capistrano and related packages
+- gem install bundler capistrano
+install:
+# make sure we allow ssh'ing to the servers
+- echo $SSH_PUBKEY_STAGING >> $HOME/.ssh/known_hosts
+- eval "$(ssh-agent -s)" #start the ssh agent
+- openssl aes-256-cbc -K $encrypted_e64c44062370_key -iv $encrypted_e64c44062370_iv -in ssh-privkey-staging.pem.enc -out ssh-privkey-staging.pem -d
+- chmod 600 ssh-privkey-staging.pem
+- ssh-add ssh-privkey-staging.pem
+before_script:
+
+script:
+- ansible all -m ping # try contacting the server
+- echo 'It works!'
