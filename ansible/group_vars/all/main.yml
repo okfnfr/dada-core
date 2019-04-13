@@ -2,4 +2,3 @@
 # variables used for all alaveteli servers (staging + prod)
 
 db_user_name: foi
-db_user_password: "{{ lookup('env', 'DB_USER_PASSWORD') }}"

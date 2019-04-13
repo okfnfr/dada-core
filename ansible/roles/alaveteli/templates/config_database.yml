@@ -1,0 +1,30 @@
+# Database configuration
+#
+default: &default
+  adapter: postgresql
+  template: template_utf8
+  host: /var/run/postgresql/
+  port: 5432
+
+development:
+  <<: *default
+  database: alaveteli_development
+  username: vagrant
+  password: null
+
+# Warning: The database defined as 'test' will be erased and
+# re-generated from your development database when you run 'rake'.
+# Do not set this db to the same as development or production.
+test:
+  <<: *default
+  database: alaveteli_test
+  username: vagrant
+  password: null
+# Uncomment the following if the user is not a postgres superuser
+  constraint_disabling: false
+
+production:
+  <<: *default
+  database: "{{ db_name_production }}"
+  username: "{{ db_user_name }}"
+  password: "{{ db_user_password }}"

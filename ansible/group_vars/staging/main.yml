@@ -1,7 +1,16 @@
 ---
 user_support_emails: dada@where.tf
 
----
-
 db_name_production: alaveteli_production
 db_name_test: alaveteli_test
+db_user_password: "{{ lookup('env', 'DB_USER_PASSWORD_STAGING') }}"
+
+site_domain: dadastaging.okfn.fr
+
+incoming_email_secret: "{{ lookup('env', 'INCOMING_EMAIL_SECRET_STAGING') }}"
+
+emergency_admin_password: "{{ lookup('env', 'EMERGENCY_ADMIN_PASSWORD_STAGING') }}"
+
+# send all requests to public bodies to this email instead
+# useful for staging, set to empty string in production
+override_all_public_body_emails: dada@where.tf

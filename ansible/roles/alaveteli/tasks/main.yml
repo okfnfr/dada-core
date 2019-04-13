@@ -168,3 +168,22 @@
   service:
     name: exim4
     state: restarted
+
+#
+# Configure alaveteli
+#
+
+- name: Copy config/general
+  template:
+    src: config_general.yml
+    dest: "{{ alaveteli_path }}/config/general.yml"
+
+- name: Copy config/database
+  template:
+    src: config_database.yml
+    dest: "{{ alaveteli_path }}/config/database.yml"
+
+- name: Copy config/newrelic
+  template:
+    src: config_newrelic.yml
+    dest: "{{ alaveteli_path }}/config/newrelic.yml"
