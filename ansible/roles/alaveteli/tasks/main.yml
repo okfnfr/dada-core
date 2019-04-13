@@ -126,16 +126,19 @@
 #
 
 - name: Set Exim to receive email from other servers
+  become: yes
   template:
     src: exim_update-exim4.conf.conf.j2
     dest: /etc/exim4/update-exim4.conf.conf
 
 - name: Setup exim variables
+  become: yes
   template:
     src: exim_04_alaveteli_options.j2
     dest: /etc/exim4/conf.d/main/04_alaveteli_options
 
 - name: Add alaveteli to exim trusted users
+  become: yes
   lineinfile:
     path: /etc/exim4/conf.d/main/02_exim4-config_options
     regexp: '^MAIN_TRUSTED_USERS = uucp'
@@ -149,24 +152,30 @@
     password_lock: yes
 
 - name: Set Exim router to pipe incoming emails to alaveteli
+  become: yes
   template:
     src: exim_router_04_alaveteli.j2
     dest: /etc/exim4/conf.d/router/04_alaveteli
 
 - name: Set Exim transport to pipe incoming emails to alaveteli
+  become: yes
   template:
     src: exim_transport_04_alaveteli.j2
     dest: /etc/exim4/conf.d/transport/04_alaveteli
 
 - name: Create exim aliases for the router
+  become: yes
+  become_user: alaveteli
   template:
     src: exim_config_aliases.j2
     dest: "{{ alaveteli_path }}/config/aliases"
 
 - name: Update exim config
   shell: /usr/sbin/update-exim4.conf
+  become: yes
 
 - name: Restart exim
+  become: yes
   service:
     name: exim4
     state: restarted
@@ -176,16 +185,22 @@
 #
 
 - name: Copy config/general
+  become: yes
+  become_user: alaveteli
   template:
     src: config_general.yml
     dest: "{{ alaveteli_path }}/config/general.yml"
 
 - name: Copy config/database
+  become: yes
+  become_user: alaveteli
   template:
     src: config_database.yml
     dest: "{{ alaveteli_path }}/config/database.yml"
 
 - name: Copy config/newrelic
+  become: yes
+  become_user: alaveteli
   template:
     src: config_newrelic.yml
     dest: "{{ alaveteli_path }}/config/newrelic.yml"
