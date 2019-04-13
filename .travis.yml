@@ -26,8 +26,8 @@ install:
 
 before_script:
 # ansible cannot get the vault password from an env var
-- echo $ANSIBLE_VAULT_PASSWORD > ~/.ansible_vault_pwd
-- export DEFAULT_VAULT_PASSWORD_FILE=~/.ansible_vault_pwd
+- echo $ANSIBLE_VAULT_PASSWORD > /tmp/.ansible_vault_pwd
+- export DEFAULT_VAULT_PASSWORD_FILE=/tmp/.ansible_vault_pwd
 
 script:
 - ansible-playbook -i ansible/ansible_inventory ansible/site.yml
