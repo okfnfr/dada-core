@@ -5,6 +5,9 @@ db_name_production: alaveteli_production
 db_name_test: alaveteli_test
 db_user_password: "{{ lookup('env', 'DB_USER_PASSWORD_STAGING') }}"
 
+# this one is in vault.yml, encrypted
+rails_secret_key_base: "{{ vault_rails_secret_key_base }}"
+
 site_domain: dadastaging.okfn.fr
 
 incoming_email_secret: "{{ lookup('env', 'INCOMING_EMAIL_SECRET_STAGING') }}"
