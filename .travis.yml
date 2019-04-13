@@ -22,5 +22,4 @@ install:
 before_script:
 
 script:
-- ansible -i ansible_inventory staging -m ping # try contacting the server
-- echo 'It works!'
+- ansible-playbook -i ansible/ansible_inventory ansible/site.yml

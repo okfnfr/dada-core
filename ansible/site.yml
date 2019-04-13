@@ -1,0 +1,7 @@
+---
+# Point d'entree du playbook ansible
+
+- name: Setup alaveteli and dependencies
+  hosts: all
+  roles:
+    - alaveteli

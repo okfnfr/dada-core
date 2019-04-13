@@ -1,0 +1,120 @@
+---
+# Setup alaveteli and dependencies
+# but not MTA, DB, which are in separate roles
+
+# Setup based on https://alaveteli.org/docs/installing/manual_install/
+
+- name: Create alaveteli user
+  become: yes
+  user:
+    name: alaveteli
+    comment: Alaveteli
+    groups: adm
+    password_lock: yes
+
+- name: Create directory for alaveteli source (1/2)
+  become: yes
+  file:
+    path: /var/www
+    owner: alaveteli
+    group: alaveteli
+    state: directory
+
+- name: Create directory for alaveteli source (2/2)
+  become: yes
+  file:
+    path: /var/www/alaveteli
+    owner: alaveteli
+    group: alaveteli
+    state: directory
+
+- name: Clone alaveteli repository
+  become: yes
+  become_user: alaveteli
+  git:
+    repo: https://github.com/mysociety/alaveteli.git
+    dest: /var/www/alaveteli
+    version: master
+    depth: 1
+    recursive: yes
+
+- name: Apt update and upgrade
+  become: yes
+  apt:
+    update_cache: yes
+    upgrade: safe
+
+- name: Install apt packages needed by Alaveteli
+  become: yes
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+      # list copied from alaveteli/config/packages
+    - build-essential
+    - bundler
+    - catdoc
+    - elinks
+    - exim4
+    - geoip-database
+    - gettext
+    - ghostscript
+    - gnuplot-nox
+    - imagemagick
+    - irb
+    - libapache2-mod-passenger
+    - libicu-dev
+    - libmagic-dev
+    - libmagickwand-dev
+    - libpq-dev
+    - libsqlite3-dev
+    - libxml2-dev
+    - libxslt1-dev
+    - links
+    - lockfile-progs
+    - memcached
+    - mutt
+    - pdftk
+    - poppler-utils
+    - python-psycopg2
+    - python-yaml
+    - rake
+    - rdoc
+    - ruby
+    - ruby-dev
+    - sqlite3
+    - tnef
+    - ttf-bitstream-vera
+    - unrtf
+    - unzip
+    - uuid-dev
+    - wkhtmltopdf
+    - wv
+    - xapian-tools
+
+#
+# DATABASE / POSTGRESQL
+#
+- name: Create alaveteli databases
+  # based on https://alaveteli.org/docs/installing/manual_install/#configure-database
+  # but we skip creating the template, and just apply the encoding on each db directly
+  become: yes
+  become_user: postgres
+  postgresql_db:
+    name: "{{ item }}"
+    encoding: "UTF-8"
+    owner: "{{ db_user_name }}"
+    template: template_utf8
+  loop:
+    - alaveteli_development
+    - alaveteli_test
+    - alaveteli_production
+
+#
+# EMAIL / MTA / EXIM
+#
+
+- name: Set Exim to receive email from other servers
+  template:
+    src: update-exim4.conf.conf.j2
+    dest: /etc/exim4/update-exim4.conf.conf
