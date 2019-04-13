@@ -1,2 +1,7 @@
 ---
 user_support_emails: dada@where.tf
+
+---
+
+db_name_production: alaveteli_production
+db_name_test: alaveteli_test

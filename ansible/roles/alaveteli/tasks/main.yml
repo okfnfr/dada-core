@@ -95,20 +95,29 @@
 #
 # DATABASE / POSTGRESQL
 #
+# based on https://alaveteli.org/docs/installing/manual_install/#configure-database
+
+- name: Create template database
+  become: yes
+  become_user: postgres
+  postgresql_db:
+    name: template_utf8
+    encoding: "UTF-8"
+    template: template0
+
+- name: Mark template_utf8 as template DB
+  shell: psql -c "update pg_database set datistemplate=true where datname='template_utf8';"
+
 - name: Create alaveteli databases
-  # based on https://alaveteli.org/docs/installing/manual_install/#configure-database
-  # but we skip creating the template, and just apply the encoding on each db directly
   become: yes
   become_user: postgres
   postgresql_db:
     name: "{{ item }}"
-    encoding: "UTF-8"
     owner: "{{ db_user_name }}"
     template: template_utf8
   loop:
-    - alaveteli_development
-    - alaveteli_test
-    - alaveteli_production
+    - "{{ db_name_test }}"
+    - "{{ db_name_production }}"
 
 #
 # EMAIL / MTA / EXIM
