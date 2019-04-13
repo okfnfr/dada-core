@@ -38,6 +38,20 @@
     depth: 1
     recursive: yes
 
+- name: Add key for passenger apt repository
+  become: yes
+  apt_key:
+    keyserver: keyserver.ubuntu.com
+    state: present
+    id: 561F9B9CAC40B2F7
+
+- name: Add passenger apt repository
+  become: yes
+  apt_repository:
+    repo: deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main
+    state: present
+    filename: passenger
+
 - name: Apt update and upgrade
   become: yes
   apt:
@@ -54,15 +68,16 @@
     - build-essential
     - bundler
     - catdoc
+    - dirmngr
     - elinks
     - exim4
     - geoip-database
     - gettext
     - ghostscript
+    - gnupg
     - gnuplot-nox
     - imagemagick
     - irb
-    - libapache2-mod-passenger
     - libicu-dev
     - libmagic-dev
     - libmagickwand-dev
@@ -74,6 +89,8 @@
     - lockfile-progs
     - memcached
     - mutt
+    - nginx-extras
+    - passenger
     - pdftk
     - poppler-utils
     - python-psycopg2
@@ -218,3 +235,16 @@
   become_user: alaveteli
   environment:
     RAILS_ENV: production
+
+- name: Setup passenger with nginx
+  become: yes
+  lineinfile:
+    path: /etc/nginx/nginx.conf
+    regexp: '# include /etc/nginx/passenger.conf;'
+    line: '        include /etc/nginx/passenger.conf;'
+
+- name: Restart nginx
+  become: yes
+  service:
+    name: nginx
+    state: restarted
