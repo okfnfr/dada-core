@@ -1,0 +1,5 @@
+alaveteli_request:
+   debug_print = "R: alaveteli for $local_part@$domain"
+   driver = redirect
+   data = ${lookup{$local_part}wildlsearch{ALAVETELI_HOME/config/aliases}}
+   pipe_transport = alaveteli_mailin_transport

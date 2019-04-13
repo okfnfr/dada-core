@@ -1,0 +1,7 @@
+alaveteli_mailin_transport:
+   driver = pipe
+   command = $address_pipe ${lc:$local_part}
+   current_directory = ALAVETELI_HOME
+   home_directory = ALAVETELI_HOME
+   user = ALAVETELI_USER
+   group = ALAVETELI_USER

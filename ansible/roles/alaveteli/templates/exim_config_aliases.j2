@@ -1,0 +1,7 @@
+^foi\\+.*: "|{{ alaveteli_path }}/script/mailin", backupfoi
+support-utilisateurs: {{ user_support_emails }}
+
+# We use this for envelope from for some messages where
+# we don't care about delivery
+ne-pas-repondre:        :blackhole:
+support-utilisateurs:     |{{ alaveteli_path }}/script/handle-mail-replies

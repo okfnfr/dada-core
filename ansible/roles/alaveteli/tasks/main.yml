@@ -116,5 +116,46 @@
 
 - name: Set Exim to receive email from other servers
   template:
-    src: update-exim4.conf.conf.j2
+    src: exim_update-exim4.conf.conf.j2
     dest: /etc/exim4/update-exim4.conf.conf
+
+- name: Setup exim variables
+  template:
+    src: exim_04_alaveteli_options.j2
+    dest: /etc/exim4/conf.d/main/04_alaveteli_options
+
+- name: Add alaveteli to exim trusted users
+  lineinfile:
+    path: /etc/exim4/conf.d/main/02_exim4-config_options
+    regexp: '^MAIN_TRUSTED_USERS = uucp'
+    line: 'MAIN_TRUSTED_USERS = uucp : alaveteli'
+
+- name: Create backupfoi user
+  become: yes
+  user:
+    name: backupfoi
+    comment: Alaveteli mail backup
+    password_lock: yes
+
+- name: Set Exim router to pipe incoming emails to alaveteli
+  template:
+    src: exim_router_04_alaveteli.j2
+    dest: /etc/exim4/conf.d/router/04_alaveteli
+
+- name: Set Exim transport to pipe incoming emails to alaveteli
+  template:
+    src: exim_transport_04_alaveteli.j2
+    dest: /etc/exim4/conf.d/transport/04_alaveteli
+
+- name: Create exim aliases for the router
+  template:
+    src: exim_config_aliases.j2
+    dest: "{{ alaveteli_path }}/config/aliases"
+
+- name: Update exim config
+  shell: /usr/sbin/update-exim4.conf
+
+- name: Restart exim
+  service:
+    name: exim4
+    state: restarted
