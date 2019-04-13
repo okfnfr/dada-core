@@ -23,7 +23,7 @@
 - name: Create directory for alaveteli source (2/2)
   become: yes
   file:
-    path: /var/www/alaveteli
+    path: "{{ alaveteli_path }}"
     owner: alaveteli
     group: alaveteli
     state: directory
@@ -33,7 +33,7 @@
   become_user: alaveteli
   git:
     repo: https://github.com/mysociety/alaveteli.git
-    dest: /var/www/alaveteli
+    dest: "{{ alaveteli_path }}"
     version: master
     depth: 1
     recursive: yes
