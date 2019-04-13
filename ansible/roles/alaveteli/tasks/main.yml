@@ -204,3 +204,17 @@
   template:
     src: config_newrelic.yml
     dest: "{{ alaveteli_path }}/config/newrelic.yml"
+
+- name: Run rails-post-deploy
+  shell: "{{ alaveteli_path }}/script/rails-post-deploy"
+  become: yes
+  become_user: alaveteli
+  environment:
+    RAILS_ENV: production
+
+- name: Rebuilt xapian search index
+  shell: "{{ alaveteli_path }}/script/update-xapian-index"
+  become: yes
+  become_user: alaveteli
+  environment:
+    RAILS_ENV: production
