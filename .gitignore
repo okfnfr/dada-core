@@ -1,0 +1,7 @@
+# ignore private key files to prevent accidentally committing them
+ssh-privkey-staging.pem
+
+# dependencies
+ansible/roles/anxs.postgresql
+
+ansible/site.retry
