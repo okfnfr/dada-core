@@ -107,6 +107,8 @@
 
 - name: Mark template_utf8 as template DB
   shell: psql -c "update pg_database set datistemplate=true where datname='template_utf8';"
+  become: yes
+  become_user: postgres
 
 - name: Create alaveteli databases
   become: yes
