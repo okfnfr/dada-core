@@ -1,0 +1,9 @@
+
+production:
+  repository: git://github.com/mysociety/alaveteli.git
+  branch: master
+  server: "{{ site_domain }}"
+  user: deploy
+  rails_env: production
+  deploy_to: "{{ alaveteli_path }}/alaveteli"
+  daemon_name: alaveteli

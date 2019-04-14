@@ -243,12 +243,40 @@
   environment:
     RAILS_ENV: production
 
-- name: Setup passenger with nginx
+# ansible is likely to fail here on the first run, because no certificate exists yet
+# to fix this, ssh into the server, and run
+# $ sudo certbot --nginx certonly
+# this will ask a couple of questions (domain name and owner's email)
+# and setup certificates for you
+# then logout and rerun the ansible job (by rerunning the travis job, it should be fine then)
+
+- name: Setup nginx main config
   become: yes
-  lineinfile:
-    path: /etc/nginx/nginx.conf
-    regexp: '# include /etc/nginx/passenger.conf;'
-    line: '        include /etc/nginx/passenger.conf;'
+  template:
+    src: nginx_main.conf.j2
+    dest: /etc/nginx/nginx.conf
+
+- name: Setup nginx site config
+  become: yes
+  template:
+    src: nginx_alaveteli.conf.j2
+    dest: /etc/nginx/sites-available/alaveteli.conf
+
+- name: Make the site live
+  become: yes
+  file:
+    src: /etc/nginx/sites-available/alaveteli.conf
+    dest: /etc/nginx/sites-enabled/alaveteli.conf
+    state: link
+
+- name: Create application daemon
+  become: yes
+  template:
+    src: daemon_alaveteli.j2
+    dest: /etc/init.d/alaveteli
+    owner: root
+    group: alaveteli
+    mode: 754
 
 - name: Restart nginx
   become: yes
