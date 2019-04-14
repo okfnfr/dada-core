@@ -504,7 +504,7 @@ STAGING_SITE: 0
 # RECAPTCHA_SITE_KEY - String (default: 'x')
 #
 # ---
-RECAPTCHA_SITE_KEY: ''
+RECAPTCHA_SITE_KEY: '{{ recaptcha_site_key }}'
 
 # Recaptcha, for detecting humans. Get keys here:
 # https://www.google.com/recaptcha
@@ -513,7 +513,7 @@ RECAPTCHA_SITE_KEY: ''
 # RECAPTCHA_SECRET_KEY - String (default: 'x')
 #
 # ---
-RECAPTCHA_SECRET_KEY: ''
+RECAPTCHA_SECRET_KEY: '{{ recaptcha_secret_key }}'
 
 # Number of days after which to send a 'new response reminder'
 #
