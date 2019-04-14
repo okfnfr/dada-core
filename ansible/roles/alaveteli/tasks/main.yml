@@ -52,6 +52,11 @@
     state: present
     filename: passenger
 
+- name: Add letsencrypt PPA
+  become: yes
+  apt_repository:
+    repo: ppa:certbot/certbot
+
 - name: Apt update and upgrade
   become: yes
   apt:
@@ -68,6 +73,7 @@
     - build-essential
     - bundler
     - catdoc
+    - certbot
     - dirmngr
     - elinks
     - exim4
@@ -93,6 +99,7 @@
     - passenger
     - pdftk
     - poppler-utils
+    - python-certbot-nginx
     - python-psycopg2
     - python-yaml
     - rake
