@@ -22,3 +22,7 @@ recaptcha_secret_key: "{{ lookup('env', 'RECAPTCHA_SECRET_KEY') }}"
 # send all requests to public bodies to this email instead
 # useful for staging, set to empty string in production
 override_all_public_body_emails: dada@where.tf
+
+# change the prefix for staging/production
+# to limit confusion
+incoming_email_prefix: dadastaging+

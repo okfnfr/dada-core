@@ -319,7 +319,7 @@ INCOMING_EMAIL_DOMAIN: 'dadastaging.okfn.fr'
 #   INCOMING_EMAIL_PREFIX: 'alaveteli+'
 #
 # ---
-INCOMING_EMAIL_PREFIX: 'foi+'
+INCOMING_EMAIL_PREFIX: '{{ incoming_email_prefix }}'
 
 # Used for hash in request email address.
 #
