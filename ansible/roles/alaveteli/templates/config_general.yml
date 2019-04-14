@@ -36,7 +36,7 @@ SITE_NAME: 'DadaFrance'
 #   DOMAIN: 'www.example.com'
 #
 # ---
-DOMAIN: '"{{ site_domain }}"'
+DOMAIN: '{{ site_domain }}'
 
 # If true forces everyone (in the production environment) to use encrypted
 # connections (via https) by redirecting unencrypted connections. This is
@@ -330,7 +330,7 @@ INCOMING_EMAIL_PREFIX: 'foi+'
 #   INCOMING_EMAIL_SECRET: '11ae 4e3b 70ff c001 3682 4a51 e86d ef5f'
 #
 # ---
-INCOMING_EMAIL_SECRET: '"{{ incoming_email_secret }}"'
+INCOMING_EMAIL_SECRET: '{{ incoming_email_secret }}'
 
 # Filter incoming mail that looks like spam. Spam can be redirected to the
 # holding pen or discarded.
@@ -392,7 +392,7 @@ ADMIN_USERNAME: 'emergency'
 #   ADMIN_PASSWORD: 'b38bCHBl;28'
 #
 # ---
-ADMIN_PASSWORD: '"{{ emergency_admin_password }}"'
+ADMIN_PASSWORD: '{{ emergency_admin_password }}'
 
 # Disable the emergency admin user?
 #
@@ -462,7 +462,7 @@ RAW_EMAILS_LOCATION: 'files/raw_emails'
 #   SECRET_KEY_BASE: 'uIngVC238Jn9NsaQizMNf89pliYmDBFugPjHS2JJmzOp8'
 #
 # ---
-SECRET_KEY_BASE: '"{{ rails_secret_key_base }}"'
+SECRET_KEY_BASE: '{{ rails_secret_key_base }}'
 
 
 # If present, puts the site in read only mode, and uses the text as reason
@@ -671,7 +671,7 @@ GA_CODE: ''
 #   OVERRIDE_ALL_PUBLIC_BODY_REQUEST_EMAILS: test-email@example.com
 #
 # ---
-OVERRIDE_ALL_PUBLIC_BODY_REQUEST_EMAILS: '"{{ override_all_public_body_emails }}"'
+OVERRIDE_ALL_PUBLIC_BODY_REQUEST_EMAILS: '{{ override_all_public_body_emails }}'
 
 # Search path for external commandline utilities (such as pdftohtml, pdftk,
 # unrtf)
