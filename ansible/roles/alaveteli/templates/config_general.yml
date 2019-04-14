@@ -288,7 +288,7 @@ THEME_URLS:
 #   THEME_BRANCH: false
 #
 # ---
-THEME_BRANCH: 'develop'
+THEME_BRANCH: '{{ theme_branch }}'
 
 # Does a user need to sign in to start the New Request process?
 #
