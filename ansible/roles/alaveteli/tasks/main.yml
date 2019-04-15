@@ -320,6 +320,8 @@
     mode: 754
 
 - name: Restart nginx
+  # this also restarts the rails app through passenger
+  # see https://www.phusionpassenger.com/library/admin/nginx/restart_app.html#restarting-nginx
   become: yes
   service:
     name: nginx
