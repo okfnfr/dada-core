@@ -25,7 +25,8 @@ override_all_public_body_emails: dada@where.tf
 
 # change the prefix for staging/production
 # to limit confusion
-incoming_email_prefix: dadastaging+
+incoming_email_short_prefix: dadastaging
+incoming_email_prefix: "{{ incoming_email_short_prefix }}+"
 
 # git branch in theme repo to use for the site
 # the production site should use master
