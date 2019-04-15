@@ -31,3 +31,6 @@ incoming_email_prefix: "{{ incoming_email_short_prefix }}+"
 # git branch in theme repo to use for the site
 # the production site should use master
 theme_branch: staging
+
+# folder where exim will write incoming emails
+raw_emails_location: files/raw_emails

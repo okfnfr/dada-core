@@ -167,6 +167,15 @@
 # EMAIL / MTA / EXIM
 #
 
+- name: Create raw emails folder
+  become: yes
+  file:
+    path: "{{ alaveteli_path }}/{{ raw_emails_location }}"
+    owner: alaveteli
+    group: ubuntu
+    state: directory
+    mode: 0775
+
 - name: Set Exim to receive email from other servers
   become: yes
   template:
