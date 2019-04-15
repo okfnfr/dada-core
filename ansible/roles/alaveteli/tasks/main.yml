@@ -50,9 +50,9 @@
   become: yes
   become_user: alaveteli
   git:
-    repo: https://github.com/mysociety/alaveteli.git
+    repo: "{{ alaveteli_repo }}"
     dest: "{{ alaveteli_path }}"
-    version: master
+    version: "{{ alaveteli_commit }}"
     depth: 1
     recursive: yes
 
