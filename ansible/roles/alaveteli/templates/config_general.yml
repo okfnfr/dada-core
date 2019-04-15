@@ -154,7 +154,7 @@ TWITTER_WIDGET_ID: ''
 #   AVAILABLE_LOCALES: 'en es'
 #
 # ---
-AVAILABLE_LOCALES: 'fr'
+AVAILABLE_LOCALES: 'fr_FR'
 
 # Nominate one of the AVAILABLE_LOCALES locales as the default
 #
@@ -165,7 +165,7 @@ AVAILABLE_LOCALES: 'fr'
 #   DEFAULT_LOCALE: 'en'
 #
 # ---
-DEFAULT_LOCALE: 'fr'
+DEFAULT_LOCALE: 'fr_FR'
 
 # Should Alaveteli try to use the default language of the user's browser?
 #

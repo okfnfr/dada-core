@@ -118,6 +118,7 @@
     - pdftk
     - poppler-utils
     - python-certbot-nginx
+    - python-pip
     - python-psycopg2
     - python-yaml
     - rake
@@ -133,6 +134,12 @@
     - wkhtmltopdf
     - wv
     - xapian-tools
+
+- name: Install transifex CLI
+  become: yes
+  pip:
+    name: transifex-client
+    state: latest
 
 #
 # DATABASE / POSTGRESQL
@@ -255,6 +262,13 @@
   template:
     src: config_newrelic.yml
     dest: "{{ alaveteli_path }}/config/newrelic.yml"
+
+- name: Download latest translations
+  become: yes
+  become_user: alaveteli
+  shell: tx pull -l fr_FR
+  environment:
+    TX_TOKEN: "{{ transifex_token }}"
 
 - name: Run rails-post-deploy
   shell: "{{ alaveteli_path }}/script/rails-post-deploy"

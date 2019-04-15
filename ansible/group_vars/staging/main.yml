@@ -43,3 +43,7 @@ theme_branch: staging
 
 # folder where exim will write incoming emails
 raw_emails_location: files/raw_emails
+
+# api token to download the translations
+# Any account that has access to them should work
+transifex_token: "{{ lookup('env', 'TRANSIFEX_TOKEN') }}"
