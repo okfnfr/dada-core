@@ -20,7 +20,7 @@ before_install:
 - ansible-galaxy install --roles-path ansible/roles anxs.postgresql
 install:
 - eval "$(ssh-agent -s)" #start the ssh agent
-- openssl aes-256-cbc -K $encrypted_e64c44062370_key -iv $encrypted_e64c44062370_iv -in ssh-privkey-staging.pem.enc -out ssh-privkey-staging.pem -d
+- openssl aes-256-cbc -K $encrypted_c45a8137ba6f_key -iv $encrypted_c45a8137ba6f_iv -in ssh-privkey-staging.pem.enc -out ssh-privkey-staging.pem -d
 - chmod 600 ssh-privkey-staging.pem
 - ssh-add ssh-privkey-staging.pem
 
