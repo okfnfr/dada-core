@@ -267,6 +267,8 @@
   become: yes
   become_user: alaveteli
   shell: tx pull -l fr_FR
+  args:
+    chdir: "{{ alaveteli_path }}"
   environment:
     TX_TOKEN: "{{ transifex_token }}"
 
