@@ -1,5 +1,4 @@
 language: ruby
-dist: xenial
 
 jobs:
   include:
@@ -39,12 +38,14 @@ jobs:
     # this is being pushed. Only 1 deployment max will happen on any push
     - <<: *setup_ansible
       if: branch = "master"
+      dist: xenial
       rvm: 2.5
       env:
       - DEPLOY_SERVER_NAME="production"
       - PRIVKEY_FILE="ssh-privkey-production"
     - <<: *setup_ansible
       if: branch = "dev"
+      dist: xenial
       rvm: 2.5
       env:
       - DEPLOY_SERVER_NAME="staging"
