@@ -23,7 +23,7 @@ jobs:
       - ansible-galaxy install --roles-path ansible/roles anxs.postgresql
       install:
       - eval "$(ssh-agent -s)" #start the ssh agent
-      - openssl aes-256-cbc -K $encrypted_e64c44062370_key -iv $encrypted_e64c44062370_iv -in "$PRIVKEY_FILE".enc -out $PRIVKEY_FILE -d
+      - openssl aes-256-cbc -K $encrypted_e64c44062370_key -iv $encrypted_e64c44062370_iv -in "${PRIVKEY_FILE}".enc -out $PRIVKEY_FILE -d
       - chmod 600 $PRIVKEY_FILE
       - ssh-add $PRIVKEY_FILE
 
