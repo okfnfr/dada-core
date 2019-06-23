@@ -3,7 +3,7 @@
 default: &default
   adapter: postgresql
   template: template_utf8
-  host: /var/run/postgresql/
+  host: localhost
   port: 5432
 
 development:
