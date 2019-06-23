@@ -1,5 +1,3 @@
-language: ruby
-
 jobs:
   include:
     - &setup_ansible
@@ -38,6 +36,7 @@ jobs:
     # this is being pushed. Only 1 deployment max will happen on any push
     - <<: *setup_ansible
       if: branch = "master"
+      language: ruby
       dist: xenial
       rvm: 2.5
       env:
@@ -45,6 +44,7 @@ jobs:
       - PRIVKEY_FILE="ssh-privkey-production"
     - <<: *setup_ansible
       if: branch = "dev"
+      language: ruby
       dist: xenial
       rvm: 2.5
       env:
