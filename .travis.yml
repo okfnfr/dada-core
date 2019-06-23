@@ -24,6 +24,7 @@ jobs:
       install:
       - eval "$(ssh-agent -s)" #start the ssh agent
       - openssl aes-256-cbc -K $encrypted_e64c44062370_key -iv $encrypted_e64c44062370_iv -in ssh-privkeys.tar.enc -out ssh-privkeys.tar -d
+      - tar xvf ssh-privkeys.tar
       - chmod 600 $PRIVKEY_FILE
       - ssh-add $PRIVKEY_FILE
 
