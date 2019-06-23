@@ -14,7 +14,6 @@ jobs:
       # install ansible for provisioning of server (setup db, nginx, MTA...)
       - sudo add-apt-repository --yes ppa:ansible/ansible
       - sudo apt-get update -y
-      - sudo apt-get upgrade -y
       - sudo apt-get install ansible
       # install capistrano and related packages
       - gem install bundler capistrano
