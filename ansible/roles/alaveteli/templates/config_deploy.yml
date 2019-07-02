@@ -1,7 +1,7 @@
 
 production:
-  repository: git://github.com/mysociety/alaveteli.git
-  branch: master
+  repository: "{{ alaveteli_repo }}"
+  branch: "{{ alaveteli_commit }}"
   server: "{{ site_domain }}"
   user: deploy
   rails_env: production

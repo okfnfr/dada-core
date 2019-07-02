@@ -279,7 +279,7 @@
   environment:
     RAILS_ENV: production
 
-- name: Rebuilt xapian search index
+- name: Rebuild xapian search index
   shell: "{{ alaveteli_path }}/script/update-xapian-index"
   become: yes
   become_user: alaveteli
