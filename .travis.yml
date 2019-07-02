@@ -5,6 +5,7 @@ addons:
   ssh_known_hosts:
   - dadastaging.okfn.fr
   - opendada.fr
+  - 92.243.18.104
 before_install:
 # export a few variables based on the current branch
 - chmod +x set_env_vars_based_on_git_branch.sh
