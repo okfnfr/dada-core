@@ -1,52 +1,38 @@
-jobs:
-  include:
-    - &setup_ansible
-      addons:
-        ssh_known_hosts:
-        - dadastaging.okfn.fr
-        - opendada.fr
-      before_install:
-      # install ansible for provisioning of server (setup db, nginx, MTA...)
-      - sudo add-apt-repository --yes ppa:ansible/ansible
-      - sudo apt-get update -y
-      - sudo apt-get install ansible
-      # install capistrano and related packages
-      - gem install bundler capistrano
-      - cp ansible/ansible.cfg ~/.ansible.cfg
-      - sudo touch /var/log/ansible.log
-      - sudo chown travis /var/log/ansible.log
-      - ansible-galaxy install --roles-path ansible/roles anxs.postgresql,v1.11.1
-      install:
-      - eval "$(ssh-agent -s)" #start the ssh agent
-      - openssl aes-256-cbc -K $encrypted_e64c44062370_key -iv $encrypted_e64c44062370_iv -in ssh-privkeys.tar.enc -out ssh-privkeys.tar -d
-      - tar xvf ssh-privkeys.tar
-      - chmod 600 $PRIVKEY_FILE
-      - ssh-add $PRIVKEY_FILE
+dist: xenial
+rvm: 2.5
+language: ruby
+addons:
+  ssh_known_hosts:
+  - dadastaging.okfn.fr
+  - opendada.fr
+before_install:
+# export a few variables based on the current branch
+- chmod +x set_env_vars_based_on_git_branch.sh
+- ./set_env_vars_based_on_git_branch.sh
+# check that the exports were correct
+- echo $DEPLOY_SERVER_NAME
+- echo $PRIVKEY_FILE
+# install ansible for provisioning of server (setup db, nginx, MTA...)
+- sudo add-apt-repository --yes ppa:ansible/ansible
+- sudo apt-get update -y
+- sudo apt-get install ansible
+# install capistrano and related packages
+- gem install bundler capistrano
+- cp ansible/ansible.cfg ~/.ansible.cfg
+- sudo touch /var/log/ansible.log
+- sudo chown travis /var/log/ansible.log
+- ansible-galaxy install --roles-path ansible/roles anxs.postgresql,v1.11.1
+install:
+- eval "$(ssh-agent -s)" #start the ssh agent
+- openssl aes-256-cbc -K $encrypted_e64c44062370_key -iv $encrypted_e64c44062370_iv -in ssh-privkeys.tar.enc -out ssh-privkeys.tar -d
+- tar xvf ssh-privkeys.tar
+- chmod 600 $PRIVKEY_FILE
+- ssh-add $PRIVKEY_FILE
 
-      before_script:
-      # ansible cannot get the vault password from an env var
-      - echo $ANSIBLE_VAULT_PASSWORD > /tmp/.ansible_vault_pwd
-      - export ANSIBLE_VAULT_PASSWORD_FILE=/tmp/.ansible_vault_pwd
+before_script:
+# ansible cannot get the vault password from an env var
+- echo $ANSIBLE_VAULT_PASSWORD > /tmp/.ansible_vault_pwd
+- export ANSIBLE_VAULT_PASSWORD_FILE=/tmp/.ansible_vault_pwd
 
-      script:
-      - ansible-playbook -i ansible/ansible_inventory ansible/site.yml --limit $DEPLOY_SERVER_NAME
-
-    # the above defines the script to run to deploy the server
-    # below we create 2 jobs that run conditionaly depending on the branch
-    # this is being pushed. Only 1 deployment max will happen on any push
-    - <<: *setup_ansible
-      if: branch = "master"
-      language: ruby
-      dist: xenial
-      rvm: 2.5
-      env:
-      - DEPLOY_SERVER_NAME="production"
-      - PRIVKEY_FILE="ssh-privkey-production"
-    - <<: *setup_ansible
-      if: branch = "dev"
-      language: ruby
-      dist: xenial
-      rvm: 2.5
-      env:
-      - DEPLOY_SERVER_NAME="staging"
-      - PRIVKEY_FILE="ssh-privkey-staging.pem"
+script:
+- ansible-playbook -i ansible/ansible_inventory ansible/site.yml --limit $DEPLOY_SERVER_NAME
