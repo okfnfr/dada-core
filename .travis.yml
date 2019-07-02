@@ -8,7 +8,7 @@ addons:
 before_install:
 # export a few variables based on the current branch
 - chmod +x set_env_vars_based_on_git_branch.sh
-- ./set_env_vars_based_on_git_branch.sh
+- source ./set_env_vars_based_on_git_branch.sh
 # check that the exports were correct
 - echo $DEPLOY_SERVER_NAME
 - echo $PRIVKEY_FILE
