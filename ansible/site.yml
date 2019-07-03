@@ -3,5 +3,12 @@
 
 - name: Setup alaveteli and dependencies
   hosts: all
+  pre_tasks:
+  # pre_tasks will run before dependencies such as postgresql
+    - name: Ensure a locale exists
+      locale_gen:
+        name: en_US.UTF-8
+        state: present
+
   roles:
     - alaveteli
