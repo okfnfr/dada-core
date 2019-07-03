@@ -1,0 +1,49 @@
+---
+# the alaveteli repo to use
+# Note: this is the alaveteli app which is normally fetched from
+# https://github.com/mysociety/alaveteli/
+# but this setting allows us to use a fork and branch
+# for hotfixes or customisations
+alaveteli_repo: "https://github.com/okfnfr/alaveteli/"
+# the branch, tag or commit ref to checkout. Defaults to master
+alaveteli_commit: fix_external_command_path
+
+user_support_emails: demandes@opendada.fr
+
+db_name_production: alaveteli_production
+db_name_test: alaveteli_test
+db_user_password: "{{ lookup('env', 'DB_USER_PASSWORD_PRODUCTION') }}"
+
+# this one is in vault.yml, encrypted
+rails_secret_key_base: "{{ vault_rails_secret_key_base }}"
+
+site_domain: opendada.fr
+
+# these env vars come from travis secret variables
+incoming_email_secret: "{{ lookup('env', 'INCOMING_EMAIL_SECRET_PRODUCTION') }}"
+
+emergency_admin_password: "{{ lookup('env', 'EMERGENCY_ADMIN_PASSWORD_PRODUCTION') }}"
+
+recaptcha_site_key: 6LcrJJ4UAAAAAAokc-1h06cfzlQgTsjeQMsyd7en
+
+recaptcha_secret_key: "{{ lookup('env', 'RECAPTCHA_SECRET_KEY') }}"
+
+# send all requests to public bodies to this email instead
+# useful for staging, set to empty string in production
+override_all_public_body_emails: dada@where.tf
+
+# change the prefix for staging/production
+# to limit confusion
+incoming_email_short_prefix: dada
+incoming_email_prefix: "{{ incoming_email_short_prefix }}+"
+
+# git branch in theme repo to use for the site
+# the production site should use master
+theme_branch: master
+
+# folder where exim will write incoming emails
+raw_emails_location: files/raw_emails
+
+# api token to download the translations
+# Any account that has access to them should work
+transifex_token: "{{ lookup('env', 'TRANSIFEX_TOKEN') }}"
