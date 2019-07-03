@@ -46,16 +46,6 @@
     state: touch
     mode: 0664
 
-- name: Clone alaveteli repository
-  become: yes
-  become_user: alaveteli
-  git:
-    repo: "{{ alaveteli_repo }}"
-    dest: "{{ alaveteli_path }}"
-    version: "{{ alaveteli_commit }}"
-    depth: 1
-    recursive: yes
-
 - name: Add key for passenger apt repository
   become: yes
   apt_key:
@@ -98,6 +88,7 @@
     - geoip-database
     - gettext
     - ghostscript
+    - git
     - gnupg
     - gnuplot-nox
     - imagemagick
@@ -134,6 +125,16 @@
     - wkhtmltopdf
     - wv
     - xapian-tools
+
+- name: Clone alaveteli repository
+  become: yes
+  become_user: alaveteli
+  git:
+    repo: "{{ alaveteli_repo }}"
+    dest: "{{ alaveteli_path }}"
+    version: "{{ alaveteli_commit }}"
+    depth: 1
+    recursive: yes
 
 - name: Install transifex CLI
   become: yes
