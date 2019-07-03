@@ -4,6 +4,11 @@
 
 # Setup based on https://alaveteli.org/docs/installing/manual_install/
 
+- name: Ensure a locale exists
+  locale_gen:
+    name: en_US.UTF-8
+    state: present
+
 - name: Create alaveteli user
   become: yes
   user:
