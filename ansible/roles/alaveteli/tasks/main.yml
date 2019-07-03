@@ -231,10 +231,11 @@
 
 - name: Create exim aliases for the router
   become: yes
-  become_user: alaveteli
   template:
     src: exim_config_aliases.j2
     dest: "{{ alaveteli_path }}/config/aliases"
+    owner: alaveteli
+    group: alaveteli
 
 - name: Update exim config
   shell: /usr/sbin/update-exim4.conf
@@ -252,24 +253,27 @@
 
 - name: Copy config/general
   become: yes
-  become_user: alaveteli
   template:
     src: config_general.yml
     dest: "{{ alaveteli_path }}/config/general.yml"
+    owner: alaveteli
+    group: alaveteli
 
 - name: Copy config/database
   become: yes
-  become_user: alaveteli
   template:
     src: config_database.yml
     dest: "{{ alaveteli_path }}/config/database.yml"
+    owner: alaveteli
+    group: alaveteli
 
 - name: Copy config/newrelic
   become: yes
-  become_user: alaveteli
   template:
     src: config_newrelic.yml
     dest: "{{ alaveteli_path }}/config/newrelic.yml"
+    owner: alaveteli
+    group: alaveteli
 
 - name: Download latest translations
   become: yes
