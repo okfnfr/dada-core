@@ -90,10 +90,10 @@
     - passenger
     - pdftk
     - poppler-utils
-    - python-certbot-nginx
-    - python-pip
-    - python-psycopg2
-    - python-yaml
+    - python3-certbot-nginx
+    - python3-pip
+    - python3-psycopg2
+    - python3-yaml
     - rake
     - rdoc
     - ruby
