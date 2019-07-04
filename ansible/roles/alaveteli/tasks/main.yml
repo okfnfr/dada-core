@@ -300,7 +300,7 @@
 
 # ansible is likely to fail here on the first run, because no certificate exists yet
 # to fix this, ssh into the server, and run
-# $ sudo certbot --nginx certonly
+# $ sudo certbot certonly --standalone
 # this will ask a couple of questions (domain name and owner's email)
 # and setup certificates for you
 # then logout and rerun the ansible job (by rerunning the travis job, it should be fine then)
