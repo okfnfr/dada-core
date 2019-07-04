@@ -26,7 +26,7 @@ emergency_admin_password: "{{ lookup('env', 'EMERGENCY_ADMIN_PASSWORD_PRODUCTION
 
 # the recaptcha keys come from https://www.google.com/recaptcha/admin/site/345908267/settings
 # the site key can be public, as it appears in the HTML page sent to user browsers
-recaptcha_site_key: 6LcrJJ4UAAAAAAokc-1h06cfzlQgTsjeQMsyd7en
+recaptcha_site_key: 6LfLmp0UAAAAAKCIr6oiwnT773NGA8wHsTihHVTq
 # the secret key must be set as a secret env var in travis
 recaptcha_secret_key: "{{ lookup('env', 'RECAPTCHA_SECRET_KEY_PRODUCTION') }}"
 
