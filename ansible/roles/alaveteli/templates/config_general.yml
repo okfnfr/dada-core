@@ -307,7 +307,7 @@ FORCE_REGISTRATION_ON_NEW_REQUEST: false
 #   INCOMING_EMAIL_DOMAIN: 'foifa.com'
 #
 # ---
-INCOMING_EMAIL_DOMAIN: 'dadastaging.okfn.fr'
+INCOMING_EMAIL_DOMAIN: '{{ site_domain }}'
 
 # An optional prefix to help you distinguish FOI requests.
 #
@@ -416,7 +416,7 @@ SKIP_ADMIN_AUTH: false
 #
 # ---
 # SET this to support-utilisateur or something
-CONTACT_EMAIL: 'dada@where.tf'
+CONTACT_EMAIL: 'contact@{{ site_domain }}'
 
 # Email "from" name
 #
@@ -431,7 +431,7 @@ CONTACT_NAME: 'DADA France'
 #
 # ---
 # SET this to support-utilisateur or something
-TRACK_SENDER_EMAIL: 'dada2@where.tf'
+TRACK_SENDER_EMAIL: 'contact@{{ site_domain }}'
 
 # Email "from" name for track messages
 #
@@ -580,7 +580,7 @@ GAZE_URL: http://gaze.mysociety.org
 #   FORWARD_NONBOUNCE_RESPONSES_TO: user-support@example.com
 #
 # ---
-FORWARD_NONBOUNCE_RESPONSES_TO: 'dada@where.tf'
+FORWARD_NONBOUNCE_RESPONSES_TO: 'support-utilisateurs@{{ site_domain }}'
 
 # The email address to which non-bounce responses to emails sent out to
 # Alaveteli Professional users by Alaveteli should be forwarded
@@ -622,7 +622,7 @@ HTML_TO_PDF_COMMAND: '/usr/bin/wkhtmltopdf'
 #   EXCEPTION_NOTIFICATIONS_FROM: do-not-reply-to-this-address@example.com
 #
 # ---
-EXCEPTION_NOTIFICATIONS_FROM: 'ne-pas-repondre@dadastaging.okfn.fr'
+EXCEPTION_NOTIFICATIONS_FROM: 'ne-pas-repondre@{{ site_domain }}'
 
 # Email address(es) used for receiving exception notifications.
 #
@@ -631,7 +631,7 @@ EXCEPTION_NOTIFICATIONS_FROM: 'ne-pas-repondre@dadastaging.okfn.fr'
 # Examples:
 #
 EXCEPTION_NOTIFICATIONS_TO:
- - dada2@where.tf
+ - 'webmaster@{{ site_domain }}'
 
 # This rate limiting can be turned off per-user via the admin interface
 #
