@@ -47,3 +47,6 @@ raw_emails_location: files/raw_emails
 # api token to download the translations
 # Any account that has access to them should work
 transifex_token: "{{ lookup('env', 'TRANSIFEX_TOKEN') }}"
+
+# disable crawling by bots (at least the ones respecting robots.txt)
+do_not_crawl: true

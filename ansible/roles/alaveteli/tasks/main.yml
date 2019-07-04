@@ -333,6 +333,17 @@
     group: alaveteli
     mode: 754
 
+- name: Disable bot indexing of the site
+  # This should only run on the staging site
+  become: yes
+  when: do_not_crawl
+  template:
+    src: robots.txt.j2
+    dest: "{{ alaveteli_path }}/public/robots.txt"
+    owner: alaveteli
+    group: alaveteli
+    mode: 644
+
 - name: Restart nginx
   # this also restarts the rails app through passenger
   # see https://www.phusionpassenger.com/library/admin/nginx/restart_app.html#restarting-nginx

@@ -49,3 +49,6 @@ raw_emails_location: files/raw_emails
 # api token to download the translations
 # Any account that has access to them should work
 transifex_token: "{{ lookup('env', 'TRANSIFEX_TOKEN') }}"
+
+# we want search engines to index this site
+do_not_crawl: false
