@@ -5,7 +5,8 @@
 # Setup based on https://alaveteli.org/docs/installing/manual_install/
 
 - name: Set hostname
-  hostname: "{{ server_name }}"
+  hostname:
+    name: "{{ server_name }}"
 
 - name: Setup /etc/hosts
   become: yes
