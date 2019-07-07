@@ -19,6 +19,9 @@ rails_secret_key_base: "{{ vault_rails_secret_key_base }}"
 
 site_domain: dadastaging.okfn.fr
 
+# hostname of the server
+server_name: dadastage
+
 # these env vars come from travis secret variables
 incoming_email_secret: "{{ lookup('env', 'INCOMING_EMAIL_SECRET_STAGING') }}"
 
