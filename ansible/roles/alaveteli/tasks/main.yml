@@ -4,6 +4,18 @@
 
 # Setup based on https://alaveteli.org/docs/installing/manual_install/
 
+- name: Set hostname
+  hostname: "{{ server_name }}"
+
+- name: Setup /etc/hosts
+  become: yes
+  template:
+    src: etc_hosts.j2
+    dest: /etc/hosts
+    owner: root
+    group: root
+    mode: 644
+
 - name: Create alaveteli user
   become: yes
   user:
