@@ -1,6 +1,5 @@
 ---
 # Setup alaveteli and dependencies
-# but not MTA, DB, which are in separate roles
 
 # Setup based on https://alaveteli.org/docs/installing/manual_install/
 
@@ -319,6 +318,8 @@
 # this will ask a couple of questions (domain name and owner's email)
 # and setup certificates for you
 # then logout and rerun the ansible job (by rerunning the travis job, it should be fine then)
+
+# NGINX / WEB SERVER
 
 - name: Setup nginx main config
   become: yes
