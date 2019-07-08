@@ -8,6 +8,16 @@
   hostname:
     name: "{{ server_name }}"
 
+- name: Preserve hostname across reboots
+  lineinfile:
+    path: /etc/hostname
+    regexp: '.*'
+    create: yes
+    line: "{{ server_name }}"
+    owner: root
+    group: root
+    mode: 644
+
 - name: Setup /etc/hosts
   become: yes
   template:
