@@ -131,6 +131,7 @@
     dest: "{{ alaveteli_path }}"
     version: "{{ alaveteli_commit }}"
     depth: 1
+    force: yes
     recursive: yes
 
 - name: Create log directory for alaveteli
