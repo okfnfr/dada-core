@@ -9,6 +9,7 @@
     name: "{{ server_name }}"
 
 - name: Preserve hostname across reboots
+  become: yes
   lineinfile:
     path: /etc/hostname
     regexp: '.*'
