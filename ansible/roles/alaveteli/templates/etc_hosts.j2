@@ -4,4 +4,4 @@
 ff02::1         ip6-allnodes
 ff02::2         ip6-allrouters
 
-"{{ ansible_default_ipv4.address }}"  "{{ server_name }}.{{ site_domain }}"
+{{ ansible_default_ipv4.address }}  {{ server_name }}.{{ site_domain }}
