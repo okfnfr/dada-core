@@ -19,6 +19,17 @@
     group: root
     mode: 644
 
+- name: Set mailname
+  become: yes
+  lineinfile:
+    path: /etc/mailname
+    regexp: '.*'
+    create: yes
+    line: "{{ site_domain }}"
+    owner: root
+    group: root
+    mode: 644
+
 - name: Setup /etc/hosts
   become: yes
   template:
