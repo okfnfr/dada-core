@@ -56,44 +56,44 @@ Rails.application.routes.draw do
   get '/body_statistics' => redirect('/statistics#public_bodies'), :as => :public_bodies_statistics
 
   ##### Request controller
-  match '/list/recent' => 'request#list',
+  match '/demandes/recentes' => 'request#list',
         :as => :request_list_recent,
         :view => 'recent',
         :via => :get
-  match '/list/all' => 'request#list',
+  match '/demandes/toutes' => 'request#list',
         :as => :request_list_all,
         :view => 'all',
         :via => :get
-  match '/list/successful' => 'request#list',
+  match '/demandes/abouties' => 'request#list',
         :as => :request_list_successful,
         :view => 'successful',
         :via => :get
-  match '/list/unsuccessful' => 'request#list',
+  match '/demandes/non_abouties' => 'request#list',
         :as => :request_list_unsuccessful,
         :view => 'unsuccessful',
         :via => :get
-  match '/list/awaiting' => 'request#list',
+  match '/demandes/en_attente' => 'request#list',
         :as => :request_list_awaiting,
         :view => 'awaiting',
         :via => :get
-  match '/list' => 'request#list',
+  match '/demandes' => 'request#list',
         :as => :request_list,
         :via => :get
 
   match '/selectionner_autorite' => 'request#select_authority',
         :as => :select_authority,
         :via => :get
-  match '/select_authorities' => 'request#select_authorities',
+  match '/selectionner_autorites' => 'request#select_authorities',
         :as => :select_authorities,
         :via => [:get, :post]
 
-  match '/new' => 'request#new',
+  match '/nouvelle_demande' => 'request#new',
         :as => :new_request,
         :via => [:get, :post]
-  match '/new/:url_name' => 'request#new',
+  match '/nouvelle_demande/:url_name' => 'request#new',
         :as => :new_request_to_body,
         :via => [:get, :post]
-  match '/new_batch' => 'request#new_batch',
+  match '/nouveau_batch' => 'request#new_batch',
         :as => :new_batch,
         :via => [:get, :post]
 
@@ -101,16 +101,16 @@ Rails.application.routes.draw do
         :as => :search_ahead,
         :via => :get
 
-  match '/request/:url_title' => 'request#show',
+  match '/demande/:url_title' => 'request#show',
         :as => :show_request,
         :via => :get
-  match '/request/:url_title/new' => 'request#show',
+  match '/demande/:url_title/new' => 'request#show',
         :as => :show_new_request,
         :via => :get
-  match '/details/request/:url_title' => 'request#details',
+  match '/details/demande/:url_title' => 'request#details',
         :as => :details_request,
         :via => :get
-  match '/similar/request/:url_title' => 'request#similar',
+  match '/demandes/similaires/:url_title' => 'request#similar',
         :as => :similar_request,
         :via => :get
 
@@ -365,37 +365,37 @@ Rails.application.routes.draw do
   ####
 
   #### Help controller
-  match '/help/unhappy/:url_title' => 'help#unhappy',
+  match '/aide/insatisfait/:url_title' => 'help#unhappy',
         :as => :help_unhappy,
         :via => :get
-  match '/help/about' => 'help#about',
+  match '/aide/a_propos' => 'help#about',
         :as => :help_about,
         :via => :get
-  match '/help/alaveteli' => 'help#alaveteli',
+  match '/aide/alaveteli' => 'help#alaveteli',
         :as => :help_alaveteli,
         :via => :get
-  match '/help/contact' => 'help#contact',
+  match '/aide/contact' => 'help#contact',
         :as => :help_contact,
         :via => [:get, :post]
-  match '/help/officers' => 'help#officers',
+  match '/aide/prada' => 'help#officers',
         :as => :help_officers,
         :via => :get
-  match '/help/requesting' => 'help#requesting',
+  match '/aide/demandes' => 'help#requesting',
         :as => :help_requesting,
         :via => :get
-  match '/help/privacy' => 'help#privacy',
+  match '/aide/vie_privee' => 'help#privacy',
         :as => :help_privacy,
         :via => :get
-  match '/help/api' => 'help#api',
+  match '/aide/api' => 'help#api',
         :as => :help_api,
         :via => :get
-  match '/help/credits' => 'help#credits',
+  match '/aide/credits' => 'help#credits',
         :as => :help_credits,
         :via => :get
-  match '/help/:action' => 'help#action',
+  match '/aide/:action' => 'help#action',
         :as => :help_general,
         :via => :get
-  match '/help' => 'help#index',
+  match '/aide' => 'help#index',
         :via => :get
   ####
 
