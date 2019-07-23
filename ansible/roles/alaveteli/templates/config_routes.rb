@@ -396,6 +396,7 @@ Rails.application.routes.draw do
         :as => :help_general,
         :via => :get
   match '/aide' => 'help#index',
+        :as => :help,
         :via => :get
   ####
 
