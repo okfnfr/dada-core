@@ -10,6 +10,8 @@ server {
     server_name {{ site_domain }};
     root {{ alaveteli_path }}/public;
 
+    client_max_body_size 15M;
+
     server_tokens off;
 
     #try_files $uri/index.html $uri @alaveteli;
