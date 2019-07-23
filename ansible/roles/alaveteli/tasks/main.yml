@@ -303,6 +303,14 @@
     owner: alaveteli
     group: alaveteli
 
+- name: Copy config/routes
+  become: yes
+  template:
+    src: config_routes.rb
+    dest: "{{ alaveteli_path }}/config/routes.rb"
+    owner: alaveteli
+    group: alaveteli
+
 - name: Copy config/newrelic
   become: yes
   template:
