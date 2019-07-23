@@ -2,4 +2,4 @@
 dadastaging.okfn.fr ansible_ssh_private_key_file=ssh-privkey-staging.pem ansible_user=ubuntu ansible_python_interpreter=/usr/bin/python3
 
 [production]
-opendada.fr ansible_host=92.243.18.104 ansible_ssh_private_key_file=ssh-privkey-prod-dada ansible_user=admin ansible_become_pass='{{ vault_ansible_become_pass }}' ansible_python_interpreter=/usr/bin/python3
+madada.fr ansible_host=92.243.18.104 ansible_ssh_private_key_file=ssh-privkey-prod-dada ansible_user=admin ansible_become_pass='{{ vault_ansible_become_pass }}' ansible_python_interpreter=/usr/bin/python3

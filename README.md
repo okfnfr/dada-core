@@ -8,7 +8,7 @@ A chaque `git push` sur le repo, [travis](https://travis-ci.org) déploie une mi
 
 Il y'a 2 branches principales, qui correspondent chacune à un serveur:
 
-- `master` déploie sur le serveur principal https://opendada.fr
+- `master` déploie sur le serveur principal https://madada.fr
 - `dev` déploie sur le serveur de staging/dev https://dadastaging.okfn.fr.
 
 Les "features branches" ne sont pas pour l'instant déployées automatiquement.

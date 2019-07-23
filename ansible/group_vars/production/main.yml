@@ -8,7 +8,7 @@ alaveteli_repo: "https://github.com/okfnfr/alaveteli/"
 # the branch, tag or commit ref to checkout. Defaults to master
 alaveteli_commit: fix_external_command_path
 
-user_support_emails: demandes@opendada.fr
+user_support_emails: demandes@madada.fr
 
 db_name_production: alaveteli_production
 db_name_test: alaveteli_test
@@ -17,7 +17,7 @@ db_user_password: "{{ lookup('env', 'DB_USER_PASSWORD_PRODUCTION') }}"
 # this one is in vault.yml, encrypted
 rails_secret_key_base: "{{ vault_rails_secret_key_base }}"
 
-site_domain: opendada.fr
+site_domain: madada.fr
 
 # hostname of the server
 server_name: dadaprod1
