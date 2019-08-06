@@ -193,6 +193,7 @@
     dest: /usr/local/bin/
     mode: 554
     remote_src: yes
+  when: inventory_hostname == 'madada.fr'
 
 #
 # DATABASE / POSTGRESQL
