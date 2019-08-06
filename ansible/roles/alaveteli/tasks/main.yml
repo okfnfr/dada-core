@@ -246,7 +246,7 @@
 - name: Setup backup env | pghost
   copy:
     content: /var/run/postgresql/
-    dest: "{{ db_backup_walg_envdir }}/PGHOST
+    dest: "{{ db_backup_walg_envdir }}/PGHOST"
     owner: root
     group: postgres
     mode: 0750
