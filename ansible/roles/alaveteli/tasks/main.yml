@@ -192,6 +192,8 @@
     src: https://github.com/wal-g/wal-g/releases/download/v0.2.9/wal-g.linux-amd64.tar.gz
     dest: /usr/local/bin/
     mode: 554
+    owner: root
+    group: postgres
     remote_src: yes
   when: inventory_hostname == 'madada.fr'
 
@@ -244,6 +246,15 @@
     group: postgres
     mode: 0750
 
+- name: Setup backup env | path
+  become: yes
+  copy:
+    content: "/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+    dest: "{{ db_backup_walg_envdir }}/PATH"
+    owner: root
+    group: postgres
+    mode: 0750
+
 - name: Setup backup env | pghost
   become: yes
   copy:
@@ -285,6 +296,15 @@
   copy:
     content: "{{ db_backup_storage_prefix }}"
     dest: "{{ db_backup_walg_envdir }}/WALG_S3_PREFIX"
+    owner: root
+    group: postgres
+    mode: 0750
+
+- name: Setup backup env | compression method
+  become: yes
+  copy:
+    content: brotli
+    dest: "{{ db_backup_walg_envdir }}/WALG_COMPRESSION_METHOD"
     owner: root
     group: postgres
     mode: 0750
