@@ -62,3 +62,5 @@ backup_storage_access_key: "{{ lookup('env', 'BACKUP_STORAGE_ACCESS_KEY') }}"
 backup_storage_secret_key: "{{ lookup('env', 'BACKUP_STORAGE_SECRET_KEY') }}"
 
 db_backup_walg_envdir: /etc/wal-g.d/env
+db_backup_storage_endpoint: "https://sos-ch-gva-2.exo.io"
+db_backup_storage_prefix: "s3://madada-db-backup"

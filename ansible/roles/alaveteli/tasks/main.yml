@@ -253,7 +253,7 @@
 
 - name: Setup backup env | endpoint
   copy:
-    content: https://sos-ch-gva-2.exo.io
+    content: "{{ db_backup_storage_endpoint }}"
     dest: "{{ db_backup_walg_envdir }}/AWS_ENDPOINT"
     owner: root
     group: postgres
@@ -277,7 +277,7 @@
 
 - name: Setup backup env | S3 prefix
   copy:
-    content: "s3://madada-db-backup"
+    content: "{{ db_backup_storage_prefix }}"
     dest: "{{ db_backup_walg_envdir }}/WALG_S3_PREFIX"
     owner: root
     group: postgres
