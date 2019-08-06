@@ -99,6 +99,7 @@
     - bundler
     - catdoc
     - certbot
+    - daemontools
     - dirmngr
     - elinks
     - exim4
@@ -223,13 +224,63 @@
     - "{{ db_name_production }}"
 
 - name: Setup cronjob to run a base backup once per day
+  become: yes
+  become_user: postgres
   cron:
     name: "daily WAL-g base backup"
-    job: "AWS_ENDPOINT=https://sos-ch-gva-2.exo.io WALG_S3_PREFIX=s3://madada-db-backup AWS_ACCESS_KEY_ID={{ backup_storage_access_key }} AWS_SECRET_ACCESS_KEY={{ backup_storage_secret_key }} PGHOST=/var/run/postgresql/ /usr/local/bin/wal-g backup-push /var/lib/postgresql/9.6/main"
+    job: "/usr/bin/envdir {{ db_backup_walg_envdir }} /usr/local/bin/wal-g backup-push /var/lib/postgresql/9.6/main"
     minute: "7"
-    hour: "13"
+    hour: "1"
     user: postgres
   when: inventory_hostname == 'madada.fr'
+
+- name: Setup envdir directory
+  file:
+    path: "{{ db_backup_walg_envdir }}"
+    state: directory
+    owner: root
+    group: postgres
+    mode: 0750
+
+- name: Setup backup env | pghost
+  copy:
+    content: /var/run/postgresql/
+    dest: "{{ db_backup_walg_envdir }}/PGHOST
+    owner: root
+    group: postgres
+    mode: 0750
+
+- name: Setup backup env | endpoint
+  copy:
+    content: https://sos-ch-gva-2.exo.io
+    dest: "{{ db_backup_walg_envdir }}/AWS_ENDPOINT"
+    owner: root
+    group: postgres
+    mode: 0750
+
+- name: Setup backup env | access key id
+  copy:
+    content: "{{ backup_storage_access_key }}"
+    dest: "{{ db_backup_walg_envdir }}/AWS_ACCESS_KEY_ID"
+    owner: root
+    group: postgres
+    mode: 0750
+
+- name: Setup backup env | secret access key
+  copy:
+    content: "{{ backup_storage_secret_key }}"
+    dest: "{{ db_backup_walg_envdir }}/AWS_SECRET_ACCESS_KEY"
+    owner: root
+    group: postgres
+    mode: 0750
+
+- name: Setup backup env | S3 prefix
+  copy:
+    content: "s3://madada-db-backup"
+    dest: "{{ db_backup_walg_envdir }}/WALG_S3_PREFIX"
+    owner: root
+    group: postgres
+    mode: 0750
 
 #
 # EMAIL / MTA / EXIM
