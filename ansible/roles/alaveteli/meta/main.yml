@@ -2,7 +2,7 @@
 dependencies:
   - role: anxs.postgresql
     become: yes
-    postgresql_version: 9.5
+    postgresql_version: 9.6
     postgresql_users:
       - name: "{{ db_user_name }}"
         pass: "{{ db_user_password }}"
