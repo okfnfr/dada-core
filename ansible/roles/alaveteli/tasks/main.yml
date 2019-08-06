@@ -191,6 +191,7 @@
     src: https://github.com/wal-g/wal-g/releases/download/v0.2.9/wal-g.linux-amd64.tar.gz
     dest: /usr/local/bin/
     mode: 554
+    remote_src: yes
 
 #
 # DATABASE / POSTGRESQL
