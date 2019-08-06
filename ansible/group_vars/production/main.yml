@@ -55,3 +55,8 @@ transifex_token: "{{ lookup('env', 'TRANSIFEX_TOKEN') }}"
 
 # we want search engines to index this site
 do_not_crawl: false
+
+# backup on exoscale block storage
+# these come from travis env vars
+backup_storage_access_key: "{{ lookup('env', 'BACKUP_STORAGE_ACCESS_KEY') }}"
+backup_storage_secret_key: "{{ lookup('env', 'BACKUP_STORAGE_SECRET_KEY') }}"

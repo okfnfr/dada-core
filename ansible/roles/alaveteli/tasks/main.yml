@@ -185,6 +185,13 @@
     name: transifex-client
     state: latest
 
+- name: Install wal-g from github releases
+  become: yes
+  unarchive:
+    src: https://github.com/wal-g/wal-g/releases/download/v0.2.9/wal-g.linux-amd64.tar.gz
+    dest: /usr/local/bin/
+    mode: 554
+
 #
 # DATABASE / POSTGRESQL
 #
@@ -213,6 +220,15 @@
   loop:
     - "{{ db_name_test }}"
     - "{{ db_name_production }}"
+
+- name: Setup cronjob to run a base backup once per day
+  cron:
+    name: "daily WAL-g base backup"
+    job: "AWS_ENDPOINT=https://sos-ch-gva-2.exo.io WALG_S3_PREFIX=s3://madada-db-backup AWS_ACCESS_KEY_ID={{ backup_storage_access_key }} AWS_SECRET_ACCESS_KEY={{ backup_storage_secret_key }} PGHOST=/var/run/postgresql/ /usr/local/bin/wal-g backup-push /var/lib/postgresql/9.6/main"
+    minute: "7"
+    hour: "13"
+    user: postgres
+  when: inventory_hostname == 'madada.fr'
 
 #
 # EMAIL / MTA / EXIM
