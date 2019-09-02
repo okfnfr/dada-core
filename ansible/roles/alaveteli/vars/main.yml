@@ -1,3 +1,4 @@
 ---
 
 alaveteli_path: /var/www/alaveteli
+postfix_log_path: /var/log/mail

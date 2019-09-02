@@ -697,7 +697,7 @@ UTILITY_SEARCH_PATH: ["/usr/bin", "/usr/local/bin"]
 #   MTA_LOG_PATH: '/var/log/exim4/exim-mainlog-*'
 #
 # ---
-MTA_LOG_PATH: '/var/log/exim4/exim-mainlog-*'
+MTA_LOG_PATH: '/var/log/mail/mail.log-*'
 
 # Are you using "exim" or "postfix" for your Mail Transfer Agent (MTA)?
 #
@@ -709,7 +709,7 @@ MTA_LOG_PATH: '/var/log/exim4/exim-mainlog-*'
 #   MTA_LOG_TYPE: postfix
 #
 # ---
-MTA_LOG_TYPE: 'exim'
+MTA_LOG_TYPE: 'postfix'
 
 # URL where people can donate to the organisation running the site. If set,
 # this will be included in the message people see when their request is

@@ -88,6 +88,14 @@
     update_cache: yes
     upgrade: safe
 
+- name: Set postfix config before installing postfix (Internet site)
+  become: yes
+  shell: echo postfix postfix/main_mailer_type select 'Internet Site' | /usr/bin/debconf-set-selections
+
+- name: Set postfix hostname
+  become: yes
+  shell: echo postfix postfix/mail_name string "{{ site_domain }}" | /usr/bin/debconf-set-selections
+
 - name: Install apt packages needed by Alaveteli
   become: yes
   apt:
@@ -102,7 +110,6 @@
     - daemontools
     - dirmngr
     - elinks
-    - exim4
     - geoip-database
     - gettext
     - ghostscript
@@ -126,6 +133,7 @@
     - passenger
     - pdftk
     - poppler-utils
+    - postfix
     - python3-certbot-nginx
     - python3-pip
     - python3-psycopg2
@@ -310,7 +318,7 @@
     mode: 0750
 
 #
-# EMAIL / MTA / EXIM
+# EMAIL / MTA / POSTFIX
 #
 
 - name: Create raw emails folder
@@ -322,24 +330,77 @@
     state: directory
     mode: 0775
 
-- name: Set Exim to receive email from other servers
-  become: yes
-  template:
-    src: exim_update-exim4.conf.conf.j2
-    dest: /etc/exim4/update-exim4.conf.conf
-
-- name: Setup exim variables
-  become: yes
-  template:
-    src: exim_04_alaveteli_options.j2
-    dest: /etc/exim4/conf.d/main/04_alaveteli_options
-
-- name: Add alaveteli to exim trusted users
+- name: Set postfix logging file
   become: yes
   lineinfile:
-    path: /etc/exim4/conf.d/main/02_exim4-config_options
-    regexp: '^MAIN_TRUSTED_USERS = uucp'
-    line: 'MAIN_TRUSTED_USERS = uucp : alaveteli'
+    path: /etc/rsyslog.d/50-default.conf
+    regexp: '^mail.\*'
+    line: 'mail.*                          -{{ postfix_log_path }}/mail.log'
+
+- name: Set postfix error logging file
+  become: yes
+  lineinfile:
+    path: /etc/rsyslog.d/50-default.conf
+    regexp: '^mail.err'
+    line: 'mail.err                          {{ postfix_log_path }}/mail.err'
+
+- name: Setup logrotate for postfix logs
+  become: yes
+  blockinfile:
+    path: /etc/logrotate.d/rsyslog
+    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
+    insertafter: EOF
+    block: |
+      {{ postfix_log_path }}/mail.log
+      {
+          rotate 30
+          daily
+          dateext
+          missingok
+          notifempty
+          compress
+          delaycompress
+          sharedscripts
+          postrotate
+                  reload rsyslog >/dev/null 2>&1 || true
+          endscript
+      }
+
+- name: Update postfix master.cf
+  become: yes
+  template:
+    src: postfix_master_cf.j2
+    dest: /etc/postfix/master.cf
+
+- name: Update postfix main.cf
+  become: yes
+  template:
+    src: postfix_main_cf.j2
+    dest: /etc/postfix/main.cf
+
+- name: Update postfix transports
+  become: yes
+  template:
+    src: postfix_transports.j2
+    dest: /etc/postfix/transports
+
+- name: Update postfix recipients
+  become: yes
+  template:
+    src: postfix_recipients.j2
+    dest: /etc/postfix/recipients
+
+- name: Update postfix recipients_bcc
+  become: yes
+  template:
+    src: postfix_recipients_bcc.j2
+    dest: /etc/postfix/recipients_bcc
+
+- name: Update postfix aliases
+  become: yes
+  template:
+    src: postfix_etc_aliases.j2
+    dest: /etc/aliases
 
 - name: Create backupfoi user
   become: yes
@@ -348,35 +409,33 @@
     comment: Alaveteli mail backup
     password_lock: yes
 
-- name: Set Exim router to pipe incoming emails to alaveteli
-  become: yes
-  template:
-    src: exim_router_04_alaveteli.j2
-    dest: /etc/exim4/conf.d/router/04_alaveteli
-
-- name: Set Exim transport to pipe incoming emails to alaveteli
-  become: yes
-  template:
-    src: exim_transport_04_alaveteli.j2
-    dest: /etc/exim4/conf.d/transport/04_alaveteli
-
-- name: Create exim aliases for the router
-  become: yes
-  template:
-    src: exim_config_aliases.j2
-    dest: "{{ alaveteli_path }}/config/aliases"
-    owner: alaveteli
-    group: alaveteli
-
-- name: Update exim config
-  shell: /usr/sbin/update-exim4.conf
-  become: yes
-
-- name: Restart exim
+- name: Restart rsyslog
   become: yes
   service:
-    name: exim4
+    name: rsyslog
     state: restarted
+
+- name: Reload email aliases
+  become: yes
+  shell: /usr/bin/newaliases
+
+- name: Reload postfix transports
+  become: yes
+  shell: /usr/sbin/postmap /etc/postfix/transports
+
+- name: Reload postfix recipients
+  become: yes
+  shell: /usr/sbin/postmap /etc/postfix/recipients
+
+- name: Reload postfix recipients_bcc
+  become: yes
+  shell: /usr/sbin/postmap /etc/postfix/recipients_bcc
+
+- name: Restart postfix
+  become: yes
+  service:
+    name: postfix
+    state: reloaded
 
 #
 # Configure alaveteli
