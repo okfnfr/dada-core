@@ -390,11 +390,11 @@
     src: postfix_recipients.j2
     dest: /etc/postfix/recipients
 
-- name: Update postfix recipients_bcc
+- name: Update postfix recipient_bcc
   become: yes
   template:
-    src: postfix_recipients_bcc.j2
-    dest: /etc/postfix/recipients_bcc
+    src: postfix_recipient_bcc.j2
+    dest: /etc/postfix/recipient_bcc
 
 - name: Update postfix aliases
   become: yes
@@ -427,9 +427,9 @@
   become: yes
   shell: /usr/sbin/postmap /etc/postfix/recipients
 
-- name: Reload postfix recipients_bcc
+- name: Reload postfix recipient_bcc
   become: yes
-  shell: /usr/sbin/postmap /etc/postfix/recipients_bcc
+  shell: /usr/sbin/postmap /etc/postfix/recipient_bcc
 
 - name: Restart postfix
   become: yes

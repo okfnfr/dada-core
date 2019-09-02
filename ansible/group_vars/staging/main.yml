@@ -21,6 +21,7 @@ site_domain: dadastaging.okfn.fr
 
 # hostname of the server
 server_name: dadastage
+server_fqdn: "{{ server_name }}.{{ site_domain }}"
 
 # these env vars come from travis secret variables
 incoming_email_secret: "{{ lookup('env', 'INCOMING_EMAIL_SECRET_STAGING') }}"
