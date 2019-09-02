@@ -122,6 +122,6 @@ mailman   unix  -       n       n       -       -       pipe
   flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py
   ${nexthop} ${user}
 alaveteli unix  -       n       n       -       50      pipe
-  flags=R user=alaveteli argv="{{ alaveteli_path }}/script/mailin"
+  flags=R user=alaveteli argv={{ alaveteli_path }}/script/mailin
 alaveteli_replies unix  -       n       n       -       50       pipe
-  flags=R user=alaveteli argv="{{ alaveteli_path }}/script/handle-mail-replies"
+  flags=R user=alaveteli argv={{ alaveteli_path }}/script/handle-mail-replies
