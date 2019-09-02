@@ -11,6 +11,6 @@ dependencies:
       - "*"
     # WAL settings for wal-g backup
     postgresql_wal_level: "replica"
-    postgresql_archive_mode: "on"
+    postgresql_archive_mode: "{{ db_backup_archive_mode }}"
     postgresql_archive_timeout: 120
-    postgresql_archive_command: "/usr/bin/envdir {{ db_backup_walg_envdir }} /usr/local/bin/wal-g wal-push %p"
+    postgresql_archive_command: "{{ db_backup_archive_command }}"

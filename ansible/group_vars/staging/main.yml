@@ -53,3 +53,13 @@ transifex_token: "{{ lookup('env', 'TRANSIFEX_TOKEN') }}"
 
 # disable crawling by bots (at least the ones respecting robots.txt)
 do_not_crawl: true
+
+# disable db backup on staging server
+backup_storage_access_key: ""
+backup_storage_secret_key: ""
+
+db_backup_walg_envdir: /etc/wal-g.d/env
+db_backup_archive_mode: "off"
+db_backup_archive_command: ""
+db_backup_storage_endpoint: "https://sos-ch-gva-2.exo.io"
+db_backup_storage_prefix: "s3://madada-db-backup"
