@@ -130,6 +130,8 @@
     - memcached
     - mutt
     - nginx-extras
+    - opendkim
+    - opendkim-tools
     - passenger
     - pdftk
     - poppler-utils
@@ -402,6 +404,21 @@
     src: postfix_etc_aliases.j2
     dest: /etc/aliases
 
+- name: Create openDKIM config file
+  become: yes
+  template:
+    src: postfix_opendkim_conf.j2
+    dest: /etc/opendkim.conf
+
+- name: Copy DKIM private key
+  become: yes
+  copy:
+    content: "{{ vault_opendkim_private_key }}"
+    dest: /etc/dkimkeys/mail.private.key
+    owner: opendkim
+    group: opendkim
+    mode: '0600'
+
 - name: Create backupfoi user
   become: yes
   user:
@@ -430,6 +447,12 @@
 - name: Reload postfix recipient_bcc
   become: yes
   shell: /usr/sbin/postmap /etc/postfix/recipient_bcc
+
+- name: Restart opendkim
+  become: yes
+  service:
+    name: opendkim
+    state: restarted
 
 - name: Restart postfix
   become: yes
