@@ -410,6 +410,30 @@
     src: postfix_opendkim_conf.j2
     dest: /etc/opendkim.conf
 
+- name: Setup openDKIM socket
+  become: yes
+  lineinefile:
+    path: /etc/default/opendkim
+    regex: '^SOCKET='
+    line: 'SOCKET="local:/var/spool/postfix/var/run/opendkim/opendkim.sock"'
+
+- name: add postfix user to opendkim group
+  become: yes
+  user:
+    name: postfix
+    create_home: no
+    groups: opendkim
+    append: yes
+
+- name: Create chrooted dkim socket directory
+  become: yes
+  file:
+    path: /var/spool/postfix/var/run/opendkim/
+    state: directory
+    owner: opendkim
+    group: opendkim
+    mode: '0755'
+
 - name: Copy DKIM private key
   become: yes
   copy:
