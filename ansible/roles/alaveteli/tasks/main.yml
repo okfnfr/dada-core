@@ -412,9 +412,9 @@
 
 - name: Setup openDKIM socket
   become: yes
-  lineinefile:
+  lineinfile:
     path: /etc/default/opendkim
-    regex: '^SOCKET='
+    regexp: '^SOCKET='
     line: 'SOCKET="local:/var/spool/postfix/var/run/opendkim/opendkim.sock"'
 
 - name: add postfix user to opendkim group
