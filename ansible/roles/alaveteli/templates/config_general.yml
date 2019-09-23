@@ -208,7 +208,7 @@ AUTHORITY_MUST_RESPOND: true
 #   REPLY_VERY_LATE_AFTER_DAYS: 40
 #
 # ---
-REPLY_LATE_AFTER_DAYS: 20
+REPLY_LATE_AFTER_DAYS: 30
 REPLY_VERY_LATE_AFTER_DAYS: 40
 
 # The WORKING_OR_CALENDAR_DAYS setting can be either "working" (the default) or
@@ -223,7 +223,7 @@ REPLY_VERY_LATE_AFTER_DAYS: 40
 #   WORKING_OR_CALENDAR_DAYS: calendar
 #
 # ---
-WORKING_OR_CALENDAR_DAYS: working
+WORKING_OR_CALENDAR_DAYS: calendar
 
 # Number of months after which to start closing requests to new responses. When
 # a request has not been updated after
