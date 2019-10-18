@@ -383,7 +383,7 @@ Rails.application.routes.draw do
   match '/aide/demandes' => 'help#requesting',
         :as => :help_requesting,
         :via => :get
-  match '/aide/vie_privee' => 'help#privacy',
+  match '/aide/confidentialite' => 'help#privacy',
         :as => :help_privacy,
         :via => :get
   match '/aide/api' => 'help#api',
