@@ -431,14 +431,14 @@ CONTACT_NAME: 'DADA France'
 #
 # ---
 # SET this to support-utilisateur or something
-TRACK_SENDER_EMAIL: 'contact@{{ site_domain }}'
+TRACK_SENDER_EMAIL: 'support@{{ site_domain }}'
 
 # Email "from" name for track messages
 #
 # TRACK_SENDER_NAME - String contact name (default: Alaveteli)
 #
 # ---
-TRACK_SENDER_NAME: 'DADAFrance'
+TRACK_SENDER_NAME: 'MaDADA'
 
 # Directory where the raw incoming email data gets stored; make sure you back
 # this up!
