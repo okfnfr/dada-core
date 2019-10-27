@@ -1,0 +1,44 @@
+# Timed tasks for Alaveteli site.
+#
+# Copyright (c) 2013 UK Citizens Online Democracy. All rights reserved.
+
+PATH=/home/alaveteli/.gem/ruby//bin:/usr/local/bin:/usr/bin:/bin
+# Uncomment the following line if running under rbenv - we want this cron to run
+# in the context of the ruby version defined for the site
+# PATH=/home/alaveteli/.rbenv/shims:/usr/local/bin:/usr/bin:/bin
+
+MAILTO=webmaster@madada.fr
+
+# Every 3 minutes
+*/3 * * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/change-xapian-database.lock "{{ alaveteli_path }}/script/update-xapian-index verbose=true" >> {{ alaveteli_path }}/log/update-xapian-index.log || echo "stalled?"
+# Every 10 minutes
+0,10,20,30,40,50 * * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/send-batch-requests.lock {{ alaveteli_path }}/script/send-batch-requests || echo "stalled?"
+
+# Once an hour
+09 * * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/alert-comment-on-request.lock {{ alaveteli_path }}/script/alert-comment-on-request || echo "stalled?"
+31 * * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/load-mail-server-logs.lock {{ alaveteli_path }}/script/load-mail-server-logs || echo "stalled?"
+
+# Once a day, early morning
+31 1 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/change-xapian-database.lock "{{ alaveteli_path }}/script/compact-xapian-database production alaveteli" || echo "stalled?"
+0 0 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/delete-expired-embargoes.lock {{ alaveteli_path }}/script/delete-expired-embargoes || echo "stalled?"
+23 4 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/delete-old-things.lock {{ alaveteli_path }}/script/delete-old-things || echo "stalled?"
+0 5 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/update-overdue-info-request-events.lock {{ alaveteli_path }}/script/update-overdue-info-request-events || echo "stalled?"
+0 6 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/alert-overdue-requests.lock {{ alaveteli_path }}/script/alert-overdue-requests || echo "stalled?"
+0 7 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/alert-new-response-reminders.lock {{ alaveteli_path }}/script/alert-new-response-reminders || echo "stalled?"
+0 8 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/alert-not-clarified-request.lock {{ alaveteli_path }}/script/alert-not-clarified-request || echo "stalled?"
+0 9 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/alert-embargoes-expiring.lock {{ alaveteli_path }}/script/alert-embargoes-expiring || echo "stalled?"
+0 10 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/update-expiring-embargo-info-request-events.lock {{ alaveteli_path }}/script/update-expiring-embargo-info-request-events || echo "stalled?"
+0 12 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/alert-embargoes-expired.lock {{ alaveteli_path }}/script/alert-embargoes-expired || echo "stalled?"
+2 4 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/check-recent-requests-sent.lock {{ alaveteli_path }}/script/check-recent-requests-sent || echo "stalled?"
+45 3 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/stop-new-responses-on-old-requests.lock {{ alaveteli_path }}/script/stop-new-responses-on-old-requests || echo "stalled?"
+55 4 * * * alaveteli {{ alaveteli_path }}/commonlib/bin/run-with-lockfile.sh -n /var/www/update-public-body-stats.lock {{ alaveteli_path }}/script/update-public-body-stats || echo "stalled?"
+
+# Once a day on all servers
+43 2 * * * alaveteli {{ alaveteli_path }}/script/request-creation-graph
+48 2 * * * alaveteli {{ alaveteli_path }}/script/user-use-graph
+
+# Once a week (very early Monday morning)
+54 2 * * 1 alaveteli {{ alaveteli_path }}/script/cleanup-holding-pen
+
+# Once a year :)
+0 0 1 11 * alaveteli {{ alaveteli_path }}/script/send-public-holiday-reminder

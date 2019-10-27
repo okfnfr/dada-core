@@ -543,6 +543,13 @@
   environment:
     RAILS_ENV: production
 
+- name: Setup cronjob to run various alaveteli tasks
+  # see https://alaveteli.org/docs/installing/manual_install/#generate-crontab
+  become: yes
+  template:
+    src: crontab_alaveteli.j2
+    dest: /etc/cron.d/alaveteli
+
 # ansible is likely to fail here on the first run, because no certificate exists yet
 # to fix this, ssh into the server, and run
 # $ sudo certbot certonly --standalone
