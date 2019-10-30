@@ -1,5 +1,4 @@
-# Configuration et déploiement de DADAFrance
-
+# Configuration et déploiement de Ma Dada
 Ce repo contient les fichiers de configuration et le code `ansible` pour déployer le site de DADA.
 
 ## Déploiement - Comment ça marche
