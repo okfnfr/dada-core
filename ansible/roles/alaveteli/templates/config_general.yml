@@ -423,7 +423,7 @@ CONTACT_EMAIL: 'contact@{{ site_domain }}'
 # CONTACT_NAME - String contact name (default: Alaveteli)
 #
 # ---
-CONTACT_NAME: 'DADA France'
+CONTACT_NAME: 'Ma Dada'
 
 # Email "from" email address for track messages
 #
@@ -438,7 +438,7 @@ TRACK_SENDER_EMAIL: 'support@{{ site_domain }}'
 # TRACK_SENDER_NAME - String contact name (default: Alaveteli)
 #
 # ---
-TRACK_SENDER_NAME: 'MaDADA'
+TRACK_SENDER_NAME: 'Ma Dada'
 
 # Directory where the raw incoming email data gets stored; make sure you back
 # this up!
