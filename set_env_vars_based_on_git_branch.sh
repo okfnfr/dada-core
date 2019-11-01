@@ -10,8 +10,8 @@ if [ "${TRAVIS_BRANCH}" == "master" ]; then
     export DEPLOY_SERVER_NAME="production"
     export PRIVKEY_FILE="ssh-privkey-production"
 
-elif [ "${TRAVIS_BRANCH}" == "dev" ]; then
-    echo "Running on dev"
+elif [ "${TRAVIS_BRANCH}" == "staging" ]; then
+    echo "Running on staging"
     export DEPLOY_SERVER_NAME="staging"
     export PRIVKEY_FILE="ssh-privkey-staging.pem"
 else
