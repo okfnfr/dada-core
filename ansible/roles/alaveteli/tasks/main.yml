@@ -573,6 +573,7 @@
           notifempty
           compress
           delaycompress
+          su alaveteli alaveteli
       }
 
 # ansible is likely to fail here on the first run, because no certificate exists yet
