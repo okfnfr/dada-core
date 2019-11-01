@@ -350,15 +350,18 @@
 - name: Setup logrotate for postfix logs
   become: yes
   blockinfile:
-    path: /etc/logrotate.d/rsyslog
-    marker: "<!-- {mark} ANSIBLE MANAGED BLOCK -->"
-    insertafter: EOF
+    path: /etc/logrotate.d/postfix_alaveteli
+    create: yes
+    owner: root
+    group: root
+    mode: 0644
     block: |
       {{ postfix_log_path }}/mail.log
       {
           rotate 180
           daily
           dateext
+          size 10M
           missingok
           notifempty
           compress
