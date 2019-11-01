@@ -127,6 +127,7 @@
     - libxslt1-dev
     - links
     - lockfile-progs
+    - logrotate
     - memcached
     - mutt
     - nginx-extras
@@ -355,7 +356,7 @@
     block: |
       {{ postfix_log_path }}/mail.log
       {
-          rotate 30
+          rotate 180
           daily
           dateext
           missingok
@@ -549,6 +550,27 @@
   template:
     src: crontab_alaveteli.j2
     dest: /etc/cron.d/alaveteli
+
+- name: Setup logrotate for alaveteli logs
+  become: yes
+  blockinfile:
+    path: /etc/logrotate.d/alaveteli
+    create: yes
+    owner: root
+    group: root
+    mode: 0644
+    block: |
+      {{ alaveteli_path }}/log/production.log
+      {
+          rotate 180
+          size 10M
+          daily
+          dateext
+          missingok
+          notifempty
+          compress
+          delaycompress
+      }
 
 # ansible is likely to fail here on the first run, because no certificate exists yet
 # to fix this, ssh into the server, and run
