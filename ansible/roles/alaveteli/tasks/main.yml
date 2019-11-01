@@ -361,7 +361,6 @@
           rotate 180
           daily
           dateext
-          size 10M
           missingok
           notifempty
           compress
