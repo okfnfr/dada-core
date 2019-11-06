@@ -368,6 +368,10 @@ Rails.application.routes.draw do
   match '/aide/insatisfait/:url_title' => 'help#unhappy',
         :as => :help_unhappy,
         :via => :get
+  # FIXME: this will break when we upgrade alaveteli, due to
+  # https://github.com/mysociety/alaveteli/issues/5059
+  match '/aide/insatisfait' => 'help#unhappy',
+        :via => :get
   match '/aide/a_propos' => 'help#about',
         :as => :help_about,
         :via => :get
