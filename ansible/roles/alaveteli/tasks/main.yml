@@ -361,7 +361,6 @@
           rotate 180
           daily
           dateext
-          size 10M
           missingok
           notifempty
           compress
@@ -369,6 +368,7 @@
           sharedscripts
           postrotate
                   reload rsyslog >/dev/null 2>&1 || true
+                  reload postfix >/dev/null 2>&1 || true
           endscript
       }
 
