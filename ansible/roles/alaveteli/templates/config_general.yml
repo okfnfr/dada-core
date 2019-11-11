@@ -1241,9 +1241,3 @@ STRIPE_WEBHOOK_SECRET: ''
 # PRO_REFERRAL_COUPON: 'PROREFERRAL'
 # ---
 PRO_REFERRAL_COUPON: ''
-# Setting up <meta> tag
-#
-#
-#
-#
-CSRF_META_TAGS: '<meta name="description" content="En France, les autorités sont tenues de communiquer les documents administratifs qu'elles détiennent aux personnes qui en font la demande." />'
