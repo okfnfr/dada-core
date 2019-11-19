@@ -17,7 +17,7 @@
     line: "{{ server_name }}"
     owner: root
     group: root
-    mode: 644
+    mode: 0644
 
 - name: Set mailname
   become: yes
@@ -28,7 +28,7 @@
     line: "{{ site_domain }}"
     owner: root
     group: root
-    mode: 644
+    mode: 0644
 
 - name: Setup /etc/hosts
   become: yes
@@ -37,7 +37,7 @@
     dest: /etc/hosts
     owner: root
     group: root
-    mode: 644
+    mode: 0644
 
 - name: Create alaveteli user
   become: yes
@@ -202,7 +202,7 @@
   unarchive:
     src: https://github.com/wal-g/wal-g/releases/download/v0.2.9/wal-g.linux-amd64.tar.gz
     dest: /usr/local/bin/
-    mode: 554
+    mode: 0554
     owner: root
     group: postgres
     remote_src: yes
@@ -611,7 +611,7 @@
     dest: /etc/init.d/alaveteli
     owner: root
     group: alaveteli
-    mode: 754
+    mode: 0754
 
 - name: Disable bot indexing of the site
   # This should only run on the staging site
@@ -622,7 +622,7 @@
     dest: "{{ alaveteli_path }}/public/robots.txt"
     owner: alaveteli
     group: alaveteli
-    mode: 644
+    mode: 0644
 
 - name: Restart nginx
   # this also restarts the rails app through passenger
