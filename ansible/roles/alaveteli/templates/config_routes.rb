@@ -387,6 +387,13 @@ Rails.application.routes.draw do
   match '/aide/demandes' => 'help#requesting',
         :as => :help_requesting,
         :via => :get
+# Ajout de 2 routes sans équivalents dans la version officielle du dépôt alaveteli
+  match '/aide/cada' => 'help#cada',
+        :as => :cada_requesting,
+        :via => :get
+  match '/aide/modele' => 'help#model',
+        :as => :model_requesting,
+        :via => :get
   match '/aide/confidentialite' => 'help#privacy',
         :as => :help_privacy,
         :via => :get
