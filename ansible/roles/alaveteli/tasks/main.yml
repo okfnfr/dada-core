@@ -384,6 +384,8 @@
     src: postfix_main_cf.j2
     dest: /etc/postfix/main.cf
 
+
+
 - name: Update postfix transports
   become: yes
   template:
@@ -516,6 +518,14 @@
     owner: alaveteli
     group: alaveteli
 
+- name: Update theme rake
+  become: yes
+  template:
+    src: themes.rake.j2
+    dest: "{{ alaveteli_path }}/lib/tasks/themes.rake"
+    owner: alaveteli
+    group: alaveteli
+    
 - name: Copy config/newrelic
   become: yes
   template:
