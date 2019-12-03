@@ -399,7 +399,7 @@ Rails.application.routes.draw do
   match '/aide/cada' => 'help#cada',
         :as => :help_cada,
         :via => :get
-  match '/aide/modele-lettre' => 'help#model',
+  match '/aide/modele' => 'help#model',
         :as => :help_model,
         :via => :get
   match '/aide/:action' => 'help#action',
