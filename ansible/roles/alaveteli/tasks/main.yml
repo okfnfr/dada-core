@@ -530,7 +530,7 @@
   become: yes
   template:
     src: model.html.j2
-    dest: "{{ alaveteli_path }}/app/views/model.html.erb"
+    dest: "{{ alaveteli_path }}/app/views/help/model.html.erb"
     owner: alaveteli
     group: alaveteli
 
@@ -538,7 +538,7 @@
   become: yes
   template:
     src: cada.html.j2
-    dest: "{{ alaveteli_path }}/app/views/cada.html.erb"
+    dest: "{{ alaveteli_path }}/app/views/help/cada.html.erb"
     owner: alaveteli
     group: alaveteli
 
