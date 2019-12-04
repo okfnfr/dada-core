@@ -525,7 +525,23 @@
     dest: "{{ alaveteli_path }}/lib/tasks/themes.rake"
     owner: alaveteli
     group: alaveteli
-    
+# ajout de 2 page pour l'aide
+- name: Placeholder aide/model
+  become: yes
+  template:
+    src: model.html.j2
+    dest: "{{ alaveteli_path }}/app/views/model.html.erb"
+    owner: alaveteli
+    group: alaveteli
+
+- name: Placeholder aide/cada
+  become: yes
+  template:
+    src: cada.html.j2
+    dest: "{{ alaveteli_path }}/app/views/cada.html.erb"
+    owner: alaveteli
+    group: alaveteli
+
 - name: Copy config/newrelic
   become: yes
   template:
