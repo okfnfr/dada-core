@@ -396,6 +396,12 @@ Rails.application.routes.draw do
   match '/aide/credits' => 'help#credits',
         :as => :help_credits,
         :via => :get
+  match '/aide/cada' => 'help#cada',
+        :as => :help_cada,
+        :via => :get
+  match '/aide/modeles' => 'help#templates',
+        :as => :help_templates,
+        :via => :get
   match '/aide/:action' => 'help#action',
         :as => :help_general,
         :via => :get
