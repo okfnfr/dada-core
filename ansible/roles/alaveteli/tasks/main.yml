@@ -553,7 +553,7 @@
 - name: Download latest translations
   become: yes
   become_user: alaveteli
-  shell: tx pull -l fr_FR
+  shell: tx pull -l fr_FR -f
   args:
     chdir: "{{ alaveteli_path }}"
   environment:
