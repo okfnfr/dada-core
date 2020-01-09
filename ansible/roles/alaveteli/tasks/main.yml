@@ -566,7 +566,7 @@
     path: "{{ alaveteli_path }}/locale/fr_FR/app.po"
     block: |
       msgid "They are going to reply <strong>by post</strong>"
-      msgid "Ils vont répondre <strong>par courrier postal</strong>"
+      msgstr "Ils vont répondre <strong>par courrier postal</strong>"
 
 - name: Run rails-post-deploy
   shell: "{{ alaveteli_path }}/script/rails-post-deploy"
