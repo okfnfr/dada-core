@@ -4,9 +4,9 @@
 # https://github.com/mysociety/alaveteli/
 # but this setting allows us to use a fork and branch
 # for hotfixes or customisations
-alaveteli_repo: "https://github.com/okfnfr/alaveteli/"
+alaveteli_repo: "https://github.com/mysociety/alaveteli/"
 # the branch, tag or commit ref to checkout. Defaults to master
-alaveteli_commit: fix_external_command_path
+alaveteli_commit: "0.33.0.0"
 
 user_support_emails: dada@where.tf
 
