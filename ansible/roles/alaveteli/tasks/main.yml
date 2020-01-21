@@ -632,6 +632,12 @@
     src: nginx_alaveteli.conf.j2
     dest: /etc/nginx/sites-available/alaveteli.conf
 
+- name: Disable nginx default site
+  become: yes
+  file:
+    path: /etc/nginx/sites-enabled/default
+    state: absent
+
 - name: Make the site live
   become: yes
   file:
