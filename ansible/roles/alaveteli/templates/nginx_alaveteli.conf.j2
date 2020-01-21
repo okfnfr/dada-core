@@ -1,12 +1,14 @@
 # Redirect any http:// request to https://www.example.com
 server {
   listen 80 default_server;
+  listen [::]:80 default_server;
   server_name {{ site_domain }};
   rewrite ^(.*) https://{{ site_domain }}$request_uri permanent;
 }
 
 server {
     listen 443 default_server ssl;
+    listen [::]:443 default_server ssl;
     server_name {{ site_domain }};
     root {{ alaveteli_path }}/public;
 
