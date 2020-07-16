@@ -56,11 +56,18 @@ transifex_token: "{{ lookup('env', 'TRANSIFEX_TOKEN') }}"
 do_not_crawl: true
 
 # disable db backup on staging server
-backup_storage_access_key: ""
-backup_storage_secret_key: ""
+# backup_storage_access_key: ""
+# backup_storage_secret_key: ""
+backup_storage_access_key: "{{ lookup('env', 'BACKUP_STORAGE_ACCESS_KEY') }}"
+backup_storage_secret_key: "{{ lookup('env', 'BACKUP_STORAGE_SECRET_KEY') }}"
 
 db_backup_walg_envdir: /etc/wal-g.d/env
 db_backup_archive_mode: "off"
 db_backup_archive_command: ""
 db_backup_storage_endpoint: "https://sos-ch-gva-2.exo.io"
 db_backup_storage_prefix: "s3://madada-db-backup"
+
+# files backup, for incoming emails
+files_backup_restic_envdir: /etc/restic/env
+files_backup_restic_repository: "{{ lookup('env', 'RESTIC_REPOSITORY') }}"
+files_backup_restic_password: "{{ lookup('env', 'RESTIC_PASSWORD') }}"

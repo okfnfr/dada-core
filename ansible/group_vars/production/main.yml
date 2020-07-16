@@ -67,3 +67,8 @@ db_backup_archive_mode: "on"
 db_backup_archive_command: "/usr/bin/envdir {{ db_backup_walg_envdir }} /usr/local/bin/wal-g wal-push %p"
 db_backup_storage_endpoint: "https://sos-ch-gva-2.exo.io"
 db_backup_storage_prefix: "s3://madada-db-backup"
+
+# files backup, for incoming emails
+files_backup_restic_envdir: /etc/restic/env
+files_backup_restic_repository: "{{ lookup('env', 'RESTIC_REPOSITORY') }}"
+files_backup_restic_password: "{{ lookup('env', 'RESTIC_PASSWORD') }}"

@@ -209,6 +209,22 @@
     remote_src: yes
   when: inventory_hostname == 'madada.fr'
 
+- name: Download restic official binary from github release page
+  become: yes
+  get_url:
+    url: https://github.com/restic/restic/releases/download/v0.9.6/restic_0.9.6_linux_amd64.bz2
+    dest: /tmp/
+
+- name: Extract restic
+  become: yes
+  shell: /usr/bin/bzip2 -cd /tmp/restic_0.9.6_linux_amd64.bz2 > /usr/local/bin/restic
+
+- name: Set restic owner and permissions
+  file:
+    path: /usr/local/bin/restic
+    mode: '0554'
+    owner: root
+    group: root
 #
 # DATABASE / POSTGRESQL
 #
@@ -320,6 +336,65 @@
     owner: root
     group: postgres
     mode: 0750
+
+#
+# RESTIC backup of files (incoming emails)
+#
+
+- name: Setup restic envdir directory
+  become: yes
+  file:
+    path: "{{ files_backup_restic_envdir }}"
+    state: directory
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Setup restic backup env | restic repository
+  become: yes
+  copy:
+    content: "{{ files_backup_restic_repository }}"
+    dest: "{{ files_backup_restic_envdir }}/RESTIC_REPOSITORY"
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Setup restic backup env | restic password
+  become: yes
+  copy:
+    content: "{{ files_backup_restic_password }}"
+    dest: "{{ files_backup_restic_envdir }}/RESTIC_PASSWORD"
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Setup restic backup env | access key
+  become: yes
+  copy:
+    content: "{{ backup_storage_access_key }}"
+    dest: "{{ files_backup_restic_envdir }}/AWS_ACCESS_KEY_ID"
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Setup restic backup env | secret key
+  become: yes
+  copy:
+    content: "{{ backup_storage_secret_key }}"
+    dest: "{{ files_backup_restic_envdir }}/AWS_SECRET_ACCESS_KEY"
+    owner: root
+    group: root
+    mode: 0750
+
+- name: Setup restic backup cron job
+  become_user: root
+  cron:
+    name: "Hourly restic backup"
+    job: "/usr/bin/envdir {{ files_backup_restic_envdir }} /usr/local/bin/restic backup {{ alaveteli_path }}/{{ raw_emails_location }}"
+    minute: "14"
+    hour: "*"
+    user: root
+    # when: inventory_hostname == 'madada.fr'
 
 #
 # EMAIL / MTA / POSTFIX
