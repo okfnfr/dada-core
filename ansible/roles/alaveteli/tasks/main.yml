@@ -222,7 +222,7 @@
 - name: Set restic owner and permissions
   file:
     path: /usr/local/bin/restic
-    mode: '0554'
+    mode: 0554
     owner: root
     group: root
 #
