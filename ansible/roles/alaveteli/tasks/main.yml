@@ -388,7 +388,7 @@
     mode: 0750
 
 - name: Setup restic backup cron job
-  become_user: root
+  become: yes
   cron:
     name: "Hourly restic backup"
     job: "/usr/bin/envdir {{ files_backup_restic_envdir }} /usr/local/bin/restic backup {{ alaveteli_path }}/{{ raw_emails_location }}"
