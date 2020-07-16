@@ -647,7 +647,7 @@
 
 - name: Prevent running destructive commands on rails production db
   # see https://github.com/mysociety/alaveteli/blob/develop/doc/CHANGES.md#upgrade-notes-5 (upgrade notes for 0.34)
-  shell: "cd {{ alaveteli_path }} && /usr/local/bin/bundle exec rails db:environment:set RAILS_ENV=production"
+  shell: "cd {{ alaveteli_path }} && bundle exec rails db:environment:set RAILS_ENV=production"
   become: yes
   become_user: alaveteli
   environment:
