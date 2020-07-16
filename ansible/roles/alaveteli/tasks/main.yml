@@ -569,6 +569,14 @@
       msgid "They are going to reply <strong>by post</strong>"
       msgstr "Ils vont répondre <strong>par courrier postal</strong>"
 
+- name: Prevent running destructive commands on rails production db
+  # see https://github.com/mysociety/alaveteli/blob/develop/doc/CHANGES.md#upgrade-notes-5 (upgrade notes for 0.34)
+  shell: "cd {{ alaveteli_path }} && /usr/local/bin/bundle exec rails db:environment:set RAILS_ENV=production"
+  become: yes
+  become_user: alaveteli
+  environment:
+    RAILS_ENV: production
+
 - name: Run rails-post-deploy
   shell: "{{ alaveteli_path }}/script/rails-post-deploy"
   become: yes
