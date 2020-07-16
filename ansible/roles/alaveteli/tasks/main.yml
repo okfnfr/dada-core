@@ -168,6 +168,11 @@
     force: yes
     recursive: yes
 
+- name: Run bundle Install
+  become: yes
+  become_user: alaveteli
+  shell: "cd {{ alaveteli_path }} && bundle install
+
 - name: Create log directory for alaveteli
   become: yes
   file:
