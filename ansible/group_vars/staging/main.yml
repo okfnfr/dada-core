@@ -6,7 +6,7 @@
 # for hotfixes or customisations
 alaveteli_repo: "https://github.com/mysociety/alaveteli/"
 # the branch, tag or commit ref to checkout. Defaults to master
-alaveteli_commit: "0.33.0.0"
+alaveteli_commit: "0.34.0.0"
 
 user_support_emails: dada@where.tf
 
@@ -64,3 +64,8 @@ db_backup_archive_mode: "off"
 db_backup_archive_command: ""
 db_backup_storage_endpoint: "https://sos-ch-gva-2.exo.io"
 db_backup_storage_prefix: "s3://madada-db-backup"
+
+# files backup, for incoming emails
+files_backup_restic_envdir: /etc/restic/env
+files_backup_restic_repository: "{{ lookup('env', 'RESTIC_REPOSITORY') }}"
+files_backup_restic_password: "{{ lookup('env', 'RESTIC_PASSWORD') }}"
