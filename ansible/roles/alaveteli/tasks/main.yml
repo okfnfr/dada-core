@@ -220,9 +220,10 @@
   shell: bzip2 -cd /tmp/restic_0.9.6_linux_amd64.bz2 > /usr/local/bin/restic
 
 - name: Set restic owner and permissions
+  become: yes
   file:
     path: /usr/local/bin/restic
-    mode: 0554
+    mode: 0654
     owner: root
     group: root
 #
