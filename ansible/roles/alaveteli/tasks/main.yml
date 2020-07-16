@@ -217,7 +217,7 @@
 
 - name: Extract restic
   become: yes
-  shell: /usr/bin/bzip2 -cd /tmp/restic_0.9.6_linux_amd64.bz2 > /usr/local/bin/restic
+  shell: bzip2 -cd /tmp/restic_0.9.6_linux_amd64.bz2 > /usr/local/bin/restic
 
 - name: Set restic owner and permissions
   file:
