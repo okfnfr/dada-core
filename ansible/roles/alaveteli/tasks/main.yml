@@ -198,11 +198,11 @@
     # name: pip
     # state: latest
 
-- name: Install transifex CLI
-  become: yes
-  pip:
-    name: transifex-client
-    state: latest
+    # - name: Install transifex CLI
+    # become: yes
+    # pip:
+    # name: transifex-client
+    # state: latest
 
 - name: Install wal-g from github releases
   become: yes
