@@ -73,7 +73,7 @@
 - name: Add passenger apt repository
   become: yes
   apt_repository:
-    repo: deb https://oss-binaries.phusionpassenger.com/apt/passenger xenial main
+    repo: deb https://oss-binaries.phusionpassenger.com/apt/passenger bionic main
     state: present
     filename: passenger
 
@@ -122,6 +122,7 @@
     - libicu-dev
     - libmagic-dev
     - libmagickwand-dev
+    - libnginx-mod-http-passenger
     - libpq-dev
     - libsqlite3-dev
     - libxml2-dev
@@ -131,7 +132,7 @@
     - logrotate
     - memcached
     - mutt
-    - nginx-extras
+    - nginx
     - opendkim
     - opendkim-tools
     - passenger
@@ -168,6 +169,11 @@
     force: yes
     recursive: yes
 
+- name: Run bundle Install
+  become: yes
+  become_user: alaveteli
+  shell: "cd {{ alaveteli_path }} && bundle install"
+
 - name: Create log directory for alaveteli
   become: yes
   file:
@@ -186,17 +192,17 @@
     state: touch
     mode: 0664
 
-- name: Upgrade pip to latest version
-  become: yes
-  pip:
-    name: pip
-    state: latest
+    # - name: Upgrade pip to latest version
+    # become: yes
+    # pip:
+    # name: pip
+    # state: latest
 
-- name: Install transifex CLI
-  become: yes
-  pip:
-    name: transifex-client
-    state: latest
+    # - name: Install transifex CLI
+    # become: yes
+    # pip:
+    # name: transifex-client
+    # state: latest
 
 - name: Install wal-g from github releases
   become: yes
@@ -757,3 +763,17 @@
   service:
     name: nginx
     state: restarted
+
+- name: Setup letsencrypt certificate renewal cron job
+  # this should renew the SSL certificate used by the site without breaking our email
+  # settings.
+  # See https://github.com/okfnfr/dada-core/issues/6#issuecomment-527367993 for details
+  become: yes
+  cron:
+    name: "Renew letsencrypt certificate"
+    job: "sudo service nginx stop ; sudo certbot renew --reuse-key ; sudo service nginx start"
+    weekday: "6"
+    minute: "17"
+    hour: "3"
+    user: root
+  when: inventory_hostname == 'madada.fr'
