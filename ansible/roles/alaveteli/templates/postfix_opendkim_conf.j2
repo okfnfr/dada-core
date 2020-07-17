@@ -11,6 +11,9 @@ UMask                   002
 Domain                  {{ site_domain }}
 KeyFile                 /etc/dkimkeys/mail.private.key
 Selector                mail
+Socket                  local:/var/spool/postfix/var/run/opendkim/opendkim.sock
+PidFile                 /var/spool/postfix/var/run/opendkim/opendkim.pid
+UserID                  opendkim
 
 # Commonly-used options; the commented-out versions show the defaults.
 #Canonicalization       simple
