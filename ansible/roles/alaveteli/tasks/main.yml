@@ -762,3 +762,17 @@
   service:
     name: nginx
     state: restarted
+
+- name: Setup letsencrypt certificate renewal cron job
+  # this should renew the SSL certificate used by the site without breaking our email
+  # settings.
+  # See https://github.com/okfnfr/dada-core/issues/6#issuecomment-527367993 for details
+  become: yes
+  cron:
+    name: "Renew letsencrypt certificate"
+    job: "sudo service nginx stop ; sudo certbot renew --reuse-key ; sudo service nginx start"
+    weekday: "6"
+    minute: "17"
+    hour: "3"
+    user: root
+  when: inventory_hostname == 'madada.fr'
