@@ -192,11 +192,11 @@
     state: touch
     mode: 0664
 
-- name: Upgrade pip to latest version
-  become: yes
-  pip:
-    name: pip
-    state: latest
+    # - name: Upgrade pip to latest version
+    # become: yes
+    # pip:
+    # name: pip
+    # state: latest
 
 - name: Install transifex CLI
   become: yes
