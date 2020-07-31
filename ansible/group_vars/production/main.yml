@@ -6,7 +6,7 @@
 # for hotfixes or customisations
 alaveteli_repo: "https://github.com/mysociety/alaveteli/"
 # the branch, tag or commit ref to checkout. Defaults to master
-alaveteli_commit: "0.36.0.0"
+alaveteli_commit: "0.37.0.0"
 
 user_support_emails: demandes@madada.fr
 
@@ -72,3 +72,5 @@ db_backup_storage_prefix: "s3://madada-db-backup"
 files_backup_restic_envdir: /etc/restic/env
 files_backup_restic_repository: "{{ lookup('env', 'RESTIC_REPOSITORY') }}"
 files_backup_restic_password: "{{ lookup('env', 'RESTIC_PASSWORD') }}"
+
+maxmind_license_key: "{{ lookup('env', 'MAXMIND_LICENSE_KEY') }}"
