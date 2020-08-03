@@ -6,7 +6,7 @@
 # for hotfixes or customisations
 alaveteli_repo: "https://github.com/mysociety/alaveteli/"
 # the branch, tag or commit ref to checkout. Defaults to master
-alaveteli_commit: "0.37.0.0"
+alaveteli_commit: "0.38.0.0"
 
 user_support_emails: demandes@madada.fr
 
