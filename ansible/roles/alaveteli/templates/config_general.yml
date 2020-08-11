@@ -585,7 +585,7 @@ GAZE_URL: http://gaze.mysociety.org
 #   FORWARD_NONBOUNCE_RESPONSES_TO: user-support@example.com
 #
 # ---
-FORWARD_NONBOUNCE_RESPONSES_TO: 'support-utilisateurs@{{ site_domain }}'
+FORWARD_NONBOUNCE_RESPONSES_TO: 'contact@{{ site_domain }}'
 
 # The email address to which non-bounce responses to emails sent out to
 # Alaveteli Professional users by Alaveteli should be forwarded
@@ -597,7 +597,7 @@ FORWARD_NONBOUNCE_RESPONSES_TO: 'support-utilisateurs@{{ site_domain }}'
 #   FORWARD_PRO_NONBOUNCE_RESPONSES_TO: pro-user-support@example.com
 #
 # ---
-FORWARD_PRO_NONBOUNCE_RESPONSES_TO: pro-user-support@localhost
+FORWARD_PRO_NONBOUNCE_RESPONSES_TO: 'contact@{{ site_domain }}'
 
 # Path to a program that converts an HTML page in a file to PDF. Also used to
 # download a zip file of all the correspondence for a request. It should take
@@ -1058,7 +1058,15 @@ USER_CONTACT_FORM_RECAPTCHA: false
 # ENABLE_ALAVETELI_PRO – Boolean (default: false)
 #
 # ---
-ENABLE_ALAVETELI_PRO: false
+ENABLE_ALAVETELI_PRO: true
+
+# Enable self-serve functions for pro features
+# We do not want this for Ma Dada, so it is se to false, so each request to
+# get access to pro can be manually approved by a site admin
+ENABLE_PRO_SELF_SERVE: false
+
+# Disable payment options for access to Pro
+ENABLE_PRO_PRICING: false
 
 # Contact email address for Alaveteli Professional.
 # Requests made through Alaveteli Professional may be embargoed, meaning that
@@ -1074,7 +1082,7 @@ ENABLE_ALAVETELI_PRO: false
 # PRO_CONTACT_EMAIL - String email address (default: pro-contact@localhost)
 #
 # ---
-PRO_CONTACT_EMAIL: 'pro-contact@localhost'
+PRO_CONTACT_EMAIL: 'contact@{{ site_domain }}'
 
 # Contact name for Alaveteli Professional.
 # The corresponding name to address emails to when sending email to
@@ -1086,7 +1094,7 @@ PRO_CONTACT_EMAIL: 'pro-contact@localhost'
 # PRO_CONTACT_NAME - String contact name (default: Alaveteli Professional)
 #
 # ---
-PRO_CONTACT_NAME: 'Alaveteli Professional'
+PRO_CONTACT_NAME: 'Ma Dada Pro'
 
 # Site name for Alaveteli Professional.
 # The name to use when referring to the Alaveteli Professional parts of an
@@ -1100,7 +1108,7 @@ PRO_CONTACT_NAME: 'Alaveteli Professional'
 # PRO_SITE_NAME - String site name (default: Alaveteli Professional)
 #
 # ---
-PRO_SITE_NAME: 'Alaveteli Professional'
+PRO_SITE_NAME: 'Ma Dada Pro'
 
 # The total number of authorities that can be added to a Alaveteli Professional
 # batch request.
