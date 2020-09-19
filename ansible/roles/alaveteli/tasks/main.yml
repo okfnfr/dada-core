@@ -218,12 +218,12 @@
 - name: Download restic official binary from github release page
   become: yes
   get_url:
-    url: https://github.com/restic/restic/releases/download/v0.9.6/restic_0.9.6_linux_amd64.bz2
+    url: https://github.com/restic/restic/releases/download/v0.10.0/restic_0.10.0_linux_amd64.bz2
     dest: /tmp/
 
 - name: Extract restic
   become: yes
-  shell: bzip2 -cd /tmp/restic_0.9.6_linux_amd64.bz2 > /usr/local/bin/restic
+  shell: bzip2 -cd /tmp/restic_0.10.0_linux_amd64.bz2 > /usr/local/bin/restic
 
 - name: Set restic owner and permissions
   become: yes
