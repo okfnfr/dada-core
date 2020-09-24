@@ -2,3 +2,10 @@
 
 alaveteli_path: /var/www/alaveteli
 postfix_log_path: /var/log/mail
+pop_mailer_username: dadamail
+pop_mailer_password: "{{ vault_pop_mailer_password }}"
+pop_mailer_hashed_password: "{{ vault_pop_mailer_hashed_password }}"
+
+vault_pop_mailer_password: "#fKrjw$Z2!*VH9G"
+# hashed password is obtained with mkpasswd --method=sha-512
+vault_pop_mailer_hashed_password: $6$nUi6ZRHA/obHN34T$EuqbrLk4qFbX4O3Q5yFmtNXzIFVavGMSPIavxV55TeB9t./Hz9Ojl08PBHkth7FYOY0gA00qgqVuA1Eck5gVV1

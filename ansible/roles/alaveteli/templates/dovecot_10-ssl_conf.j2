@@ -1,0 +1,17 @@
+##
+## SSL settings
+##
+
+ssl = required
+ssl_cert = "</etc/letsencrypt/live/{{ site_domain }}/fullchain.pem"
+ssl_key = "</etc/letsencrypt/live/{{ site_domain }}/privkey.pem"
+#ssl_key_password =
+#ssl_parameters_regenerate = 168
+ssl_protocols =
+ssl_cipher_list =
+
+# Client certificate support
+#ssl_ca =
+#ssl_require_crl = yes
+#ssl_verify_client_cert = no
+#ssl_cert_username_field = commonName

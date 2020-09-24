@@ -1,0 +1,96 @@
+##
+## Mailbox locations and namespaces
+##
+
+mail_location = "maildir:/home/{{ pop_mailer_username }}/Maildir"
+
+# Example namespace.
+namespace inbox {
+  #type = private
+  #separator =
+  #prefix =
+  #location =
+  inbox = yes
+  #hidden = no
+  #list = yes
+  #subscriptions = yes
+}
+
+#mail_shared_explicit_inbox = yes
+#mail_uid =
+#mail_gid =
+mail_privileged_group = <%= @mail_privileged_group %>
+#mail_access_groups =
+#mail_full_filesystem_access = no
+
+##
+## Mail processes
+##
+
+mmap_disable = <%= @mmap_disable %>
+#dotlock_use_excl = yes
+mail_fsync = <%= @mail_fsync %>
+#mail_nfs_storage = no
+#mail_nfs_index = no
+#lock_method = fcntl
+#mail_temp_dir = /tmp
+#first_valid_uid = 500
+#last_valid_uid = 0
+#first_valid_gid = 1
+#last_valid_gid = 0
+#mail_max_keyword_length = 50
+#valid_chroot_dirs =
+#mail_chroot =
+#auth_socket_path = /var/run/dovecot/auth-userdb
+#mail_plugin_dir = /usr/lib/dovecot/modules
+#mail_plugins =
+
+##
+## Mailbox handling optimizations
+##
+
+#mail_cache_min_mail_count = 0
+#mailbox_idle_check_interval = 30 secs
+#mail_save_crlf = no
+#mail_prefetch_count = 0
+#mail_temp_scan_interval = 1w
+
+##
+## Maildir-specific settings
+##
+
+#maildir_stat_dirs = no
+#maildir_copy_with_hardlinks = yes
+#maildir_very_dirty_syncs = no
+#maildir_broken_filename_sizes = no
+
+##
+## mbox-specific settings
+##
+
+#mbox_read_locks = fcntl
+#mbox_write_locks = dotlock fcntl
+#mbox_lock_timeout = 5 mins
+#mbox_dotlock_change_timeout = 2 mins
+#mbox_dirty_syncs = yes
+#mbox_very_dirty_syncs = no
+#mbox_lazy_writes = yes
+#mbox_min_index_size = 0
+#mbox_md5 = apop3d
+
+##
+## mdbox-specific settings
+##
+
+#mdbox_rotate_size = 2M
+#mdbox_rotate_interval = 0
+#mdbox_preallocate_space = no
+
+##
+## Mail attachments
+##
+
+#mail_attachment_dir =
+#mail_attachment_min_size = 128k
+#mail_attachment_fs = sis posix
+#mail_attachment_hash = %{sha1}

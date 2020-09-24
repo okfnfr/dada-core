@@ -1166,7 +1166,7 @@ POP_MAILER_PORT: '110'
 # POP_MAILER_USER_NAME: jane322
 #
 # ---
-POP_MAILER_USER_NAME: 'alaveteli-incoming'
+POP_MAILER_USER_NAME: "{{ pop_mailer_username }}"
 
 # Set the password of the account user to connect to the POP server used if the
 # PRODUCTION_MAILER_RETRIEVER_METHOD is set to 'pop'.
@@ -1178,7 +1178,7 @@ POP_MAILER_USER_NAME: 'alaveteli-incoming'
 # POP_MAILER_PASSWORD: supersecretpassword
 #
 # ---
-POP_MAILER_PASSWORD: 'alaveteli-incoming'
+POP_MAILER_PASSWORD: "{{ pop_mailer_password }}"
 
 # Should Alaveteli use SSL when connecting to the POP server used if the
 # PRODUCTION_MAILER_RETRIEVER_METHOD is set to 'pop'?

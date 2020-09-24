@@ -1,0 +1,34 @@
+## Dovecot configuration file
+
+# If you're in a hurry, see
+# https://doc.dovecot.org/configuration_manual/quick_configuration/
+
+!include_try /usr/share/dovecot/protocols.d/*.protocol
+#listen = *, ::
+#base_dir = /var/run/dovecot/
+#instance_name = dovecot
+#login_greeting = Dovecot ready.
+#login_trusted_networks =
+#login_access_sockets =
+#auth_proxy_self =
+#verbose_proctitle = no
+#shutdown_clients = yes
+#doveadm_worker_count = 0
+#doveadm_socket_path = doveadm-server
+#import_environment = TZ
+
+##
+## Dictionary server settings
+##
+
+dict {
+  #quota = mysql:/etc/dovecot/dovecot-dict-sql.conf.ext
+  #expire = sqlite:/etc/dovecot/dovecot-dict-sql.conf.ext
+}
+
+##
+## Includes
+##
+
+!include conf.d/*.conf
+!include_try local.conf

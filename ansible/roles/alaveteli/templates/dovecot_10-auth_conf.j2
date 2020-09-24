@@ -1,0 +1,9 @@
+## Authentication
+passdb {
+  driver = pam
+}
+
+userdb {
+  driver = static
+  args = "uid={{ pop_mailer_username }} gid={{ pop_mailer_username }} home=/home/%n mail=maildir:/home/%n/Maildir"
+}
