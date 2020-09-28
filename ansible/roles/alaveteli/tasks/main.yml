@@ -604,13 +604,13 @@
 - name: Create 10-mail.conf file
   become: yes
   template:
-    src: dovecot_10-mail.j2
+    src: dovecot_10-mail_conf.j2
     dest: /etc/dovecot/conf.d/10-mail.conf
 
 - name: Create 10-ssl.conf file
   become: yes
   template:
-    src: dovecot_10-ssl.j2
+    src: dovecot_10-ssl_conf.j2
     dest: /etc/dovecot/conf.d/10-ssl.conf
 
 - name: Create dovecot-openssl.cnf file
