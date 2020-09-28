@@ -580,7 +580,7 @@
 # dovecot then makes them available via POP3 that the app uses to fetch email
 # at its own pace
 
-- name: [Dovecot] Create unix user for email POP delivery
+- name: Create unix user for email POP delivery
   become: yes
   user:
     name: "{{ pop_mailer_username }}"
@@ -589,37 +589,37 @@
     home: "/home/{{ pop_mailer_username }}"
     password: "{{ pop_mailer_hashed_password }}"
 
-- name: [Dovecot] Create dovecot.conf file
+- name: Create dovecot.conf file
   become: yes
   template:
     src: dovecot_conf.j2
     dest: /etc/dovecot/dovecot.conf
 
-- name: [Dovecot] Create 10-auth.conf file
+- name: Create 10-auth.conf file
   become: yes
   template:
     src: dovecot_10-auth_conf.j2
     dest: /etc/dovecot/conf.d/10-auth.conf
 
-- name: [Dovecot] Create 10-mail.conf file
+- name: Create 10-mail.conf file
   become: yes
   template:
     src: dovecot_10-mail.j2
     dest: /etc/dovecot/conf.d/10-mail.conf
 
-- name: [Dovecot] Create 10-ssl.conf file
+- name: Create 10-ssl.conf file
   become: yes
   template:
     src: dovecot_10-ssl.j2
     dest: /etc/dovecot/conf.d/10-ssl.conf
 
-- name: [Dovecot] Create dovecot-openssl.cnf file
+- name: Create dovecot-openssl.cnf file
   become: yes
   template:
     src: dovecot_openssl_cnf.j2
     dest: /usr/share/dovecot/dovecot-openssl.cnf
 
-- name: [Dovecot] Restart service
+- name: Restart service
   become: yes
   service:
     name: dovecot
