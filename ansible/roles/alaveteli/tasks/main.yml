@@ -588,6 +588,7 @@
     group: alaveteli
     home: "/home/{{ pop_mailer_username }}"
     password: "{{ pop_mailer_hashed_password }}"
+    shell: /usr/sbin/nologin
 
 - name: Create dovecot.conf file
   become: yes

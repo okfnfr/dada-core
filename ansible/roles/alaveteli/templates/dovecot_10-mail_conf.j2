@@ -19,7 +19,7 @@ namespace inbox {
 #mail_shared_explicit_inbox = yes
 #mail_uid =
 #mail_gid =
-mail_privileged_group = <%= @mail_privileged_group %>
+#mail_privileged_group = mail
 #mail_access_groups =
 #mail_full_filesystem_access = no
 
@@ -27,9 +27,9 @@ mail_privileged_group = <%= @mail_privileged_group %>
 ## Mail processes
 ##
 
-mmap_disable = <%= @mmap_disable %>
+#mmap_disable = <%= @mmap_disable %>
 #dotlock_use_excl = yes
-mail_fsync = <%= @mail_fsync %>
+#mail_fsync = <%= @mail_fsync %>
 #mail_nfs_storage = no
 #mail_nfs_index = no
 #lock_method = fcntl

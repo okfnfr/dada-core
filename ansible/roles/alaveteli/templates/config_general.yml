@@ -1134,7 +1134,7 @@ PRO_BATCH_AUTHORITY_LIMIT: 500
 # PRODUCTION_MAILER_RETRIEVER_METHOD: pop
 #
 # ---
-PRODUCTION_MAILER_RETRIEVER_METHOD: passive
+PRODUCTION_MAILER_RETRIEVER_METHOD: pop
 
 # Set the address of the POP server used if the PRODUCTION_MAILER_RETRIEVER_METHOD
 # is set to 'pop'.
@@ -1190,7 +1190,7 @@ POP_MAILER_PASSWORD: "{{ pop_mailer_password }}"
 # POP_MAILER_ENABLE_SSL: true
 #
 # ---
-POP_MAILER_ENABLE_SSL: false
+POP_MAILER_ENABLE_SSL: true
 
 # Stripe.com publishable key. Only required for Alaveteli Pro.
 #
