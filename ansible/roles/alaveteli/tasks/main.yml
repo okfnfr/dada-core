@@ -585,7 +585,7 @@
   user:
     name: "{{ pop_mailer_username }}"
     comment: Inactive user for POP mailbox authentication (via PAM)
-    group: alaveteli
+    group: "{{ pop_mailer_username }}"
     home: "/home/{{ pop_mailer_username }}"
     password: "{{ pop_mailer_hashed_password }}"
     shell: /usr/sbin/nologin
