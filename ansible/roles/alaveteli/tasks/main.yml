@@ -735,6 +735,21 @@
     src: crontab_alaveteli.j2
     dest: /etc/cron.d/alaveteli
 
+- name: Setup pop polling daemon
+  become: yes
+  template:
+    src: alaveteli_poll_for_incoming.j2
+    dest: /etc/init.d/alaveteli-poll-for-incoming
+    owner: root
+    group: alaveteli
+    mode: 0754
+
+- name: Start alaveteli pop poller daemon
+  become: yes
+  service:
+    name: alaveteli-poll-for-incoming
+    state: restarted
+
 - name: Setup logrotate for alaveteli logs
   become: yes
   blockinfile:
