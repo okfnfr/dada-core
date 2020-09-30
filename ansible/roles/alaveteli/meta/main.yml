@@ -14,7 +14,7 @@ dependencies:
     postgresql_archive_mode: "{{ db_backup_archive_mode }}"
     postgresql_archive_timeout: 120
     postgresql_archive_command: "{{ db_backup_archive_command }}"
-  - role: rvm.ruby,
+  - role: rvm.ruby
     # install ruby 2.5.3 via rvm as ubuntu 18.04 only has 2.5.1
     # we need 2.5.3 to fix a bug that breaks the pop poller daemon
     become: yes
