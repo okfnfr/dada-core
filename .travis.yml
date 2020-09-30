@@ -23,6 +23,7 @@ before_install:
 - sudo touch /var/log/ansible.log
 - sudo chown travis /var/log/ansible.log
 - ansible-galaxy install --roles-path ansible/roles anxs.postgresql,v1.11.1
+- ansible-galaxy install --roles-path ansible/roles rvm.ruby
 install:
 - eval "$(ssh-agent -s)" #start the ssh agent
 - openssl aes-256-cbc -K $encrypted_e64c44062370_key -iv $encrypted_e64c44062370_iv -in ssh-privkeys.tar.enc -out ssh-privkeys.tar -d
