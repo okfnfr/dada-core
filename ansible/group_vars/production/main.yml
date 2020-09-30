@@ -10,6 +10,8 @@ alaveteli_commit: "0.38.1.0"
 
 user_support_emails: demandes@madada.fr
 
+webmaster_email: dada@where.tf
+
 db_name_production: alaveteli_production
 db_name_test: alaveteli_test
 db_user_password: "{{ lookup('env', 'DB_USER_PASSWORD_PRODUCTION') }}"
