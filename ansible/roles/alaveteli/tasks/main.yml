@@ -745,10 +745,9 @@
     mode: 0754
 
 - name: Start alaveteli pop poller daemon
+  # using ansible service module does not work because it expects a systemd .service file
   become: yes
-  service:
-    name: alaveteli-poll-for-incoming
-    state: restarted
+  command: /etc/init.d/alaveteli-poll-for-incoming restart
 
 - name: Setup logrotate for alaveteli logs
   become: yes
