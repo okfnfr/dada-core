@@ -19,3 +19,4 @@ dependencies:
     # we need 2.5.3 to fix a bug that breaks the pop poller daemon
     become: yes
     rvm1_rubies: ['ruby-2.5.3']
+    rvm1_rvm_check_for_updates: False
