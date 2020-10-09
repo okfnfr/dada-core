@@ -1074,7 +1074,7 @@ ENABLE_ALAVETELI_PRO: false
 # PRO_CONTACT_EMAIL - String email address (default: pro-contact@localhost)
 #
 # ---
-PRO_CONTACT_EMAIL: 'pro-contact@localhost'
+PRO_CONTACT_EMAIL: 'contact@madada.fr'
 
 # Contact name for Alaveteli Professional.
 # The corresponding name to address emails to when sending email to
@@ -1086,7 +1086,7 @@ PRO_CONTACT_EMAIL: 'pro-contact@localhost'
 # PRO_CONTACT_NAME - String contact name (default: Alaveteli Professional)
 #
 # ---
-PRO_CONTACT_NAME: 'Alaveteli Professional'
+PRO_CONTACT_NAME: 'Madada ++'
 
 # Site name for Alaveteli Professional.
 # The name to use when referring to the Alaveteli Professional parts of an
@@ -1100,7 +1100,7 @@ PRO_CONTACT_NAME: 'Alaveteli Professional'
 # PRO_SITE_NAME - String site name (default: Alaveteli Professional)
 #
 # ---
-PRO_SITE_NAME: 'Alaveteli Professional'
+PRO_SITE_NAME: 'Madada ++'
 
 # The total number of authorities that can be added to a Alaveteli Professional
 # batch request.
