@@ -1094,7 +1094,7 @@ PRO_CONTACT_EMAIL: 'contact@{{ site_domain }}'
 # PRO_CONTACT_NAME - String contact name (default: Alaveteli Professional)
 #
 # ---
-PRO_CONTACT_NAME: 'Ma Dada Pro'
+PRO_CONTACT_NAME: 'MaDada ++'
 
 # Site name for Alaveteli Professional.
 # The name to use when referring to the Alaveteli Professional parts of an
@@ -1108,7 +1108,7 @@ PRO_CONTACT_NAME: 'Ma Dada Pro'
 # PRO_SITE_NAME - String site name (default: Alaveteli Professional)
 #
 # ---
-PRO_SITE_NAME: 'Ma Dada Pro'
+PRO_SITE_NAME: 'Ma Dada ++'
 
 # The total number of authorities that can be added to a Alaveteli Professional
 # batch request.
