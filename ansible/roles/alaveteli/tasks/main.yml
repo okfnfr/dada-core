@@ -167,7 +167,7 @@
 
 - name: Switch to ruby 2.5 by default
   become: yes
-  shell: "ruby-switch  --set ruby2.5.8"
+  shell: "ruby-switch  --set ruby2.5"
 
 - name: Clone alaveteli repository
   become: yes
