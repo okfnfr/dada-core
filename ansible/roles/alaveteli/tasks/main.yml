@@ -82,6 +82,11 @@
   apt_repository:
     repo: ppa:certbot/certbot
 
+- name: Add brightbox ruby PPA
+  become: yes
+  apt_repository:
+    repo: ppa:brightbox/ruby-ng
+
 - name: Apt update and upgrade
   become: yes
   apt:
@@ -147,8 +152,9 @@
     - python3-yaml
     - rake
     - rdoc
-    - ruby
-    - ruby-dev
+    - ruby2.5
+    - ruby2.5-dev
+    - ruby-switch
     - sqlite3
     - tnef
     - ttf-bitstream-vera
@@ -158,6 +164,10 @@
     - wkhtmltopdf
     - wv
     - xapian-tools
+
+- name: Switch to ruby 2.5 by default
+  become: yes
+  shell: "ruby-switch  --set ruby2.5.8"
 
 - name: Clone alaveteli repository
   become: yes
