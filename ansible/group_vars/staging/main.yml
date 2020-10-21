@@ -6,9 +6,14 @@
 # for hotfixes or customisations
 alaveteli_repo: "https://github.com/mysociety/alaveteli/"
 # the branch, tag or commit ref to checkout. Defaults to master
-alaveteli_commit: "0.38.0.0"
+alaveteli_commit: "0.38.1.0"
 
 user_support_emails: dada@where.tf
+
+# keep emails locally delivered on staging server as we seem to have
+# lots of smtp connection issues
+# FIXME: change this back to an external address once smpt is fixed
+webmaster_email: ubuntu
 
 db_name_production: alaveteli_production
 db_name_test: alaveteli_test

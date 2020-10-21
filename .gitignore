@@ -3,5 +3,6 @@ ssh-privkey-staging.pem
 
 # dependencies
 ansible/roles/anxs.postgresql
+ansible/roles/rvm.ruby
 
 ansible/site.retry

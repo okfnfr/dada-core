@@ -82,6 +82,11 @@
   apt_repository:
     repo: ppa:certbot/certbot
 
+- name: Add brightbox ruby PPA
+  become: yes
+  apt_repository:
+    repo: ppa:brightbox/ruby-ng
+
 - name: Apt update and upgrade
   become: yes
   apt:
@@ -110,6 +115,7 @@
     - certbot
     - daemontools
     - dirmngr
+    - dovecot-pop3d
     - elinks
     - geoip-database
     - gettext
@@ -146,8 +152,9 @@
     - python3-yaml
     - rake
     - rdoc
-    - ruby
-    - ruby-dev
+    - ruby2.5
+    - ruby2.5-dev
+    - ruby-switch
     - sqlite3
     - tnef
     - ttf-bitstream-vera
@@ -157,6 +164,10 @@
     - wkhtmltopdf
     - wv
     - xapian-tools
+
+- name: Switch to ruby 2.5 by default
+  become: yes
+  shell: "ruby-switch  --set ruby2.5"
 
 - name: Clone alaveteli repository
   become: yes
@@ -218,12 +229,12 @@
 - name: Download restic official binary from github release page
   become: yes
   get_url:
-    url: https://github.com/restic/restic/releases/download/v0.9.6/restic_0.9.6_linux_amd64.bz2
+    url: https://github.com/restic/restic/releases/download/v0.10.0/restic_0.10.0_linux_amd64.bz2
     dest: /tmp/
 
 - name: Extract restic
   become: yes
-  shell: bzip2 -cd /tmp/restic_0.9.6_linux_amd64.bz2 > /usr/local/bin/restic
+  shell: bzip2 -cd /tmp/restic_0.10.0_linux_amd64.bz2 > /usr/local/bin/restic
 
 - name: Set restic owner and permissions
   become: yes
@@ -572,6 +583,60 @@
     state: reloaded
 
 #
+# POP3 SERVER / DOVECOT
+#
+# Instead of having incoming dada+... emails being piped into alaveteli
+# we send them to the dadamail user, postfix saves them in Maildir format
+# dovecot then makes them available via POP3 that the app uses to fetch email
+# at its own pace
+
+- name: Create unix user for email POP delivery
+  become: yes
+  user:
+    name: "{{ pop_mailer_username }}"
+    comment: Inactive user for POP mailbox authentication (via PAM)
+    group: "{{ pop_mailer_username }}"
+    home: "/home/{{ pop_mailer_username }}"
+    password: "{{ pop_mailer_hashed_password }}"
+    shell: /usr/sbin/nologin
+
+- name: Create dovecot.conf file
+  become: yes
+  template:
+    src: dovecot_conf.j2
+    dest: /etc/dovecot/dovecot.conf
+
+- name: Create 10-auth.conf file
+  become: yes
+  template:
+    src: dovecot_10-auth_conf.j2
+    dest: /etc/dovecot/conf.d/10-auth.conf
+
+- name: Create 10-mail.conf file
+  become: yes
+  template:
+    src: dovecot_10-mail_conf.j2
+    dest: /etc/dovecot/conf.d/10-mail.conf
+
+- name: Create 10-ssl.conf file
+  become: yes
+  template:
+    src: dovecot_10-ssl_conf.j2
+    dest: /etc/dovecot/conf.d/10-ssl.conf
+
+- name: Create dovecot-openssl.cnf file
+  become: yes
+  template:
+    src: dovecot_openssl_cnf.j2
+    dest: /usr/share/dovecot/dovecot-openssl.cnf
+
+- name: Restart service
+  become: yes
+  service:
+    name: dovecot
+    state: restarted
+
+#
 # Configure alaveteli
 #
 
@@ -679,6 +744,20 @@
   template:
     src: crontab_alaveteli.j2
     dest: /etc/cron.d/alaveteli
+
+- name: Setup pop polling daemon
+  become: yes
+  template:
+    src: alaveteli_poll_for_incoming.j2
+    dest: /etc/init.d/alaveteli-poll-for-incoming
+    owner: root
+    group: alaveteli
+    mode: 0754
+
+- name: Start alaveteli pop poller daemon
+  # using ansible service module does not work because it expects a systemd .service file
+  become: yes
+  command: /etc/init.d/alaveteli-poll-for-incoming restart
 
 - name: Setup logrotate for alaveteli logs
   become: yes
