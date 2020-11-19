@@ -745,6 +745,20 @@
     src: crontab_alaveteli.j2
     dest: /etc/cron.d/alaveteli
 
+- name: Setup pro notification daemon
+  become: yes
+  template:
+    src: alaveteli_send_notifications_pro.j2
+    dest: /etc/init.d/alaveteli-send-notifications
+    owner: root
+    group: alaveteli
+    mode: 0754
+
+- name: Start alaveteli pro notifications daemon
+  # using ansible service module does not work because it expects a systemd .service file
+  become: yes
+  command: /etc/init.d/alaveteli-send-notifications restart
+
 - name: Setup pop polling daemon
   become: yes
   template:
