@@ -716,6 +716,17 @@
       msgid "They are going to reply <strong>by post</strong>"
       msgstr "Ils vont répondre <strong>par courrier postal</strong>"
 
+- name: Add pagination translations (next_label, previous_label)
+  # this is due to alaveteli not supporting translation for pagination.
+  # See https://github.com/mysociety/alaveteli/issues/1163
+  become: yes
+  become_user: alaveteli
+  template:
+    src: locales_pagination
+    dest: "{{ alaveteli_path }}/config/locales/fr.yml"
+    owner: alaveteli
+    group: alaveteli
+
 - name: Prevent running destructive commands on rails production db
   # see https://github.com/mysociety/alaveteli/blob/develop/doc/CHANGES.md#upgrade-notes-5 (upgrade notes for 0.34)
   shell: "cd {{ alaveteli_path }} && bundle exec rails db:environment:set RAILS_ENV=production"
