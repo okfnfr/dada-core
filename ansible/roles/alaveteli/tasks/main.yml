@@ -722,7 +722,7 @@
   become: yes
   become_user: alaveteli
   template:
-    src: locales_pagination
+    src: locales_pagination.j2
     dest: "{{ alaveteli_path }}/config/locales/fr.yml"
     owner: alaveteli
     group: alaveteli
