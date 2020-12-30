@@ -1,4 +1,18 @@
 ---
-# variables used for all alaveteli servers (staging + prod)
+# HOW VARIABLES ARE ORGANISED IN ANSIBLE
+#
+# It's not perfect, but whatever is shared between both servers
+# should land in here. Then there are 2 folders under group_vars/
+# for the 2 different servers, with obvious names.
+# both folders have the same structure:
+# main.yml contains all the variables needed to configure the server
+# vault.yml contains all secrets that should not be publicly visible.
+# Ideally, all variables in vault start with `vault_` to make it clear that it's
+# a sensitive value. That value should be converted to a "non vault" variable in
+# main.yml
+#
+# The ansible vault is opened by the CI runner with the env var ANSIBLE_VAULT_PASSWORD
+# then pretty much everything else should live in these files here
 
+# variables used for all alaveteli servers (staging + prod)
 db_user_name: foi
