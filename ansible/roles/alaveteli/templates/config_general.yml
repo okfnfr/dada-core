@@ -270,7 +270,7 @@ FRONTPAGE_PUBLICBODY_EXAMPLES: ''
 #
 # ---
 THEME_URLS:
-  - 'https://github.com/okfnfr/dada-france-theme.git'
+  - 'https://gitlab.com/madada-team/dada-france-theme.git'
 
 # When rails-post-deploy installs the themes, it will try to use the branch
 # specified by THEME_BRANCH first. If the branch doesn't exist it will fall
@@ -559,7 +559,8 @@ GEOIP_DATABASE: vendor/data/GeoLite2-Country.mmdb
 
 # MaxMind database download now requires a license key (which can be obtained for free
 # from their site https://www.maxmind.com/en/accounts/ after creating an account)
-# The current key is stored in the travis env vars.
+# The current key is stored in ansible/group_vars/[production|staging]/main.yml
+# which in turns pulls the value from the corresponding vault file
 MAXMIND_LICENSE_KEY: '{{ maxmind_license_key }}'
 
 # In the absence of a GeoIP database (see above), Alateveli can use Gaze,

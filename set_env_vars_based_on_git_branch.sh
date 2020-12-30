@@ -8,12 +8,11 @@
 if [ "${TRAVIS_BRANCH}" == "master" ]; then
     echo "Running on master"
     export DEPLOY_SERVER_NAME="production"
-    export PRIVKEY_FILE="ssh-privkey-production"
-
+    echo "$SSH_PRIVKEY_PRODUCTION" | tr -d '\r' | ssh-add -
 elif [ "${TRAVIS_BRANCH}" == "staging" ]; then
     echo "Running on staging"
     export DEPLOY_SERVER_NAME="staging"
-    export PRIVKEY_FILE="ssh-privkey-staging.pem"
+    echo "$SSH_PRIVKEY_STAGING" | tr -d '\r' | ssh-add -
 else
     echo "Running on a non-deploying branch"
 fi

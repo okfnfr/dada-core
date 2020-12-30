@@ -14,7 +14,7 @@ webmaster_email: dada@where.tf
 
 db_name_production: alaveteli_production
 db_name_test: alaveteli_test
-db_user_password: "{{ lookup('env', 'DB_USER_PASSWORD_PRODUCTION') }}"
+db_user_password: "{{ vault_db_user_password }}"
 
 # this one is in vault.yml, encrypted
 rails_secret_key_base: "{{ vault_rails_secret_key_base }}"
@@ -25,16 +25,14 @@ site_domain: madada.fr
 server_name: dadaprod1
 server_fqdn: "{{ server_name }}.{{ site_domain }}"
 
-# these env vars come from travis secret variables
-incoming_email_secret: "{{ lookup('env', 'INCOMING_EMAIL_SECRET_PRODUCTION') }}"
+incoming_email_secret: "{{ vault_incoming_email_secret }}"
 
-emergency_admin_password: "{{ lookup('env', 'EMERGENCY_ADMIN_PASSWORD_PRODUCTION') }}"
+emergency_admin_password: "{{ vault_emergency_admin_password }}"
 
 # the recaptcha keys come from https://www.google.com/recaptcha/admin/site/345908267/settings
 # the site key can be public, as it appears in the HTML page sent to user browsers
 recaptcha_site_key: 6LfLmp0UAAAAAKCIr6oiwnT773NGA8wHsTihHVTq
-# the secret key must be set as a secret env var in travis
-recaptcha_secret_key: "{{ lookup('env', 'RECAPTCHA_SECRET_KEY_PRODUCTION') }}"
+recaptcha_secret_key: "{{ vault_recaptcha_secret_key }}"
 
 # send all requests to public bodies to this email instead
 # useful for staging, set to empty string in production
@@ -54,15 +52,14 @@ raw_emails_location: files/raw_emails
 
 # api token to download the translations
 # Any account that has access to them should work
-transifex_token: "{{ lookup('env', 'TRANSIFEX_TOKEN') }}"
+transifex_token: "{{ vault_transifex_token }}"
 
 # we want search engines to index this site
 do_not_crawl: false
 
 # backup on exoscale block storage
-# these come from travis env vars
-backup_storage_access_key: "{{ lookup('env', 'BACKUP_STORAGE_ACCESS_KEY') }}"
-backup_storage_secret_key: "{{ lookup('env', 'BACKUP_STORAGE_SECRET_KEY') }}"
+backup_storage_access_key: "{{ vault_backup_storage_access_key }}"
+backup_storage_secret_key: "{{ vault_backup_storage_secret_key }}"
 
 db_backup_walg_envdir: /etc/wal-g.d/env
 db_backup_archive_mode: "on"
@@ -72,7 +69,7 @@ db_backup_storage_prefix: "s3://madada-db-backup"
 
 # files backup, for incoming emails
 files_backup_restic_envdir: /etc/restic/env
-files_backup_restic_repository: "{{ lookup('env', 'RESTIC_REPOSITORY') }}"
-files_backup_restic_password: "{{ lookup('env', 'RESTIC_PASSWORD') }}"
+files_backup_restic_repository: "{{ vault_files_backup_restic_repository }}"
+files_backup_restic_password: "{{ vault_files_backup_restic_password }}"
 
-maxmind_license_key: "{{ lookup('env', 'MAXMIND_LICENSE_KEY') }}"
+maxmind_license_key: "{{ vault_maxmind_license_key }}"

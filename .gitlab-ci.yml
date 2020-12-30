@@ -1,0 +1,30 @@
+image: python:3.8
+
+run:
+  before_script:
+    # see https://docs.gitlab.com/ee/ci/ssh_keys/#verifying-the-ssh-host-keys
+    # about this before_script section
+    - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+    - eval "$(ssh-agent -s)" #start the ssh agent
+    # export a few variables based on the current branch
+    - chmod +x set_env_vars_based_on_git_branch.sh
+    - source ./set_env_vars_based_on_git_branch.sh
+  script:
+    # install ansible for provisioning of server (setup db, nginx, MTA...)
+    - echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list
+    - apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+    - apt-get update -y
+    - apt-get install -y ansible
+    - cp ansible/ansible.cfg ~/.ansible.cfg
+    - ansible-galaxy install --roles-path ansible/roles anxs.postgresql,v1.11.1
+    # check that the exports were correct
+    - echo $DEPLOY_SERVER_NAME
+    # ansible cannot get the vault password from an env var
+    - echo $ANSIBLE_VAULT_PASSWORD > /tmp/.ansible_vault_pwd
+    - export ANSIBLE_VAULT_PASSWORD_FILE=/tmp/.ansible_vault_pwd
+    - ansible-playbook -i ansible/ansible_inventory ansible/site.yml --limit $DEPLOY_SERVER_NAME
+  only:
+    # only deploy the site from one of these 2 branches
+    - master
+    - staging
