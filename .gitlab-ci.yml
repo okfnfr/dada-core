@@ -2,6 +2,11 @@ image: python:3.8
 
 run:
   before_script:
+    # install ansible for provisioning of server (setup db, nginx, MTA...)
+    - echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list
+    - apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
+    - apt-get update -y
+    - apt-get install -y ansible openssh-client
     # see https://docs.gitlab.com/ee/ci/ssh_keys/#verifying-the-ssh-host-keys
     # about this before_script section
     - echo "$SSH_KNOWN_HOSTS" >> ~/.ssh/known_hosts
@@ -11,11 +16,6 @@ run:
     - chmod +x set_env_vars_based_on_git_branch.sh
     - source ./set_env_vars_based_on_git_branch.sh
   script:
-    # install ansible for provisioning of server (setup db, nginx, MTA...)
-    - echo "deb http://ppa.launchpad.net/ansible/ansible/ubuntu trusty main" >> /etc/apt/sources.list
-    - apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 93C4A3FD7BB9C367
-    - apt-get update -y
-    - apt-get install -y ansible
     - cp ansible/ansible.cfg ~/.ansible.cfg
     - ansible-galaxy install --roles-path ansible/roles anxs.postgresql,v1.11.1
     # check that the exports were correct
