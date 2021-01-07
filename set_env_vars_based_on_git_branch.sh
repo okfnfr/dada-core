@@ -13,8 +13,8 @@ if [ "${CI_COMMIT_BRANCH}" == "master" ]; then
 elif [ "${CI_COMMIT_BRANCH}" == "staging" ]; then
     echo "Running on staging"
     export DEPLOY_SERVER_NAME="staging"
-    #echo "${SSH_PRIVKEY_STAGING}" | tr -d '\r' | ssh-add -
-    ssh-add $SSH_PRIVKEY_STAGING
+    echo "$SSH_PRIVKEY_STAGING" | tr -d '\r' | ssh-add -
+    #ssh-add $SSH_PRIVKEY_STAGING
     echo "ssh keys loaded"
 else
     echo "Running on a non-deploying branch"
