@@ -1,4 +1,9 @@
-# Configuration et déploiement de Ma Dada
+# This repository is now archived: please use https://gitlab.com/madada-team/dada-core/ instead.
+# Ce dépôt est maintenant archivé, merci d'utiliser https://gitlab.com/madada-team/dada-core/
+
+
+
+## Configuration et déploiement de Ma Dada
 Ce repo contient les fichiers de configuration et le code `ansible` pour déployer le site de DADA.
 
 Lire le [README du thème](https://github.com/okfnfr/dada-france-theme) pour quelques explications sur quoi modifier où.
